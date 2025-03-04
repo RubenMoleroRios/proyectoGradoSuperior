@@ -7,8 +7,10 @@
     <title>All blue</title>
 </head>
 <body>
-    
-
+    <h1>niarfeee</h1>
+    <?php 
+        phpinfo();
+    ?>
     <script src="./js/main.js"></script>
 </body>
 </html>
