@@ -4,6 +4,9 @@
         static $ID = 'id_rol_user' ;
         static $NAME = 'name';
 
+        static $ID_ADMIN = 1;
+        static $ID_NORMAL_USER = 2;
+
         public $idRolUser;
         public $name;
 
@@ -21,7 +24,11 @@
         }
 
         public function isAdmin(){
-            return idRolUser == 1;
+            return idRolUser == RolUser::$ID_ADMIN;
+        }
+
+        public function isNormalUser(){
+            return idRolUser == RolUser::$ID_NORMAL_USER;
         }
         
     }

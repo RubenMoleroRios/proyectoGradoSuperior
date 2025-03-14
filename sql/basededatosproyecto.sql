@@ -1,44 +1,4 @@
--- CREATE USER 'ruben'@'localhost' IDENTIFIED BY '9NMJMDER';
-/*
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (1, "Guppy",5,6,"18 - 28 ºC"," 3 años","Robustos peces, son conocidos por su rápida y fácil reproducción");
 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (2, "Molly",7,7,"18 - 28 ºC"," 3 años","Robustos peces, son conocidos por su rápida y fácil reproducción");
-
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (3, "Escalar",6,6,"24-26 ºC"," 9 años","El escalar o pez ángel (Pterophyllum scalare) es una especie de pez de agua dulce perteneciente a la familia de los cíclidos.");
-
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (4, "Apistograma Cacatuoides",7,7,"18 - 28 ºC"," 5 años","Apistogramma cacatuoides es una especie de peces de la familia Cichlidae en el orden de los Perciformes.");
-
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (5, "Pelvicachromis kribensis",5,5,"22 - 25 ºC"," 8 años","Robustos peces, son conocidos por su rápida y fácil reproducción");
-
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, longevidad, descripcion) 
-values (6, "Neón",6,10,"20 - 26 ºC"," 5 años","El neón es una especie de pez actinopterigio carácido originario del oeste de Sudamérica. ");
-
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (11, "anubia barteri", "6-7.5","2-12","22 - 28 ºC","superficie"); 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (12, "Cryptocoryne Balanasae", "6-7.5","5-12","22 - 28 ºC","sustrato"); 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (13, "Vallisneria", "6-9","10-12","18 - 28 ºC","sustrato"); 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (14, "Chamaedorea Elegans", "2-10","1-12","18 - 24 ºC","sustrato"); 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (15, "Hemianthus calitrichoides", "5-7","5-8","18 - 28 ºC","sustrato"); 
-insert into articulo (id_articulo, nombre, ph, gh, temperatura, plantado) values (16, "Cryptocoryne Parva", "6-8","5-12","20 - 28 ºC","superficie"); 
-
-insert into articulo (id_articulo, nombre, descripción) values (21, "ánfora", "Pequeña ánfora de arcilla");
-insert into articulo (id_articulo, nombre, descripción) values (22, "Tubo pequeño para gamba", "Refugios cerámicos para gambas");
-insert into articulo (id_articulo, nombre, descripción) values (23, "Red dragón modelo 2", "Dragón para acuarios hecho de resina");
-insert into articulo (id_articulo, nombre, descripción) values (24, "Cueva cascara de coco", "cueva y refugio natural de cascara de coco");
-insert into articulo (id_articulo, nombre, descripción) values (25, "Tijera cuerva aquascaping", "Tijera curva de 21cm");
-insert into articulo (id_articulo, nombre, descripción) values (26, "Set de herramientas para aquascaping", "Set de herramientas para aquascaping ");
-
-
-drop table user;
-Contraseñas cifradas
-insert into users (email, name, password) values ("ruben@hotmail.com","ruben", md5("prueba"));
-select * from users where name = "ruben" and password = md5("prueba");
-*/
-/*
 drop table article_order;
 drop table `order`;
 drop table user;
@@ -46,21 +6,23 @@ drop table rol_user;
 drop table review;
 drop table article;
 drop table type;
-*/
+
 
 use allblue;
 create table `rol_user` (id_rol_user int primary key, name varchar(20));
-create table `user` (id_user int primary key, user_name varchar(45), password varchar(45), id_rol_user int, foreign key (id_rol_user) references rol_user(id_rol_user));
+create table `user` (id_user int primary key auto_increment, user_name varchar(45), password varchar(45), id_rol_user int, foreign key (id_rol_user) references rol_user(id_rol_user));
 create table `order` (id_order int primary key, id_user int, address varchar(100), total_order_price double, foreign key(id_user) references user(id_user));
 create table `type` (id_type int primary key, name varchar(45));
-create table `article` (id_article int primary key auto_increment, id_type int,name varchar(50), ph double, gh double, description varchar(200), temp int, longevity varchar(10), 
+
+create table `article` (id_article int primary key auto_increment, id_type int,name varchar(50), ph double, gh double, description varchar(200), temp int, longevity_in_years int, 
 planted_in varchar(20), stock int, price double, foreign key(id_type) references type(id_type));
+
 create table `article_order` (id_article_order int primary key, id_article int, id_order int, quantity int, total_article_prince double,
 foreign key(id_article) references article(id_article), foreign key(id_order) references `order`(id_order));
 create table `review` (id_review int primary key, opinion varchar(400), id_article int, star int, foreign key(id_article) references article(id_article));
 
 insert into rol_user value (1,"admin");
-insert into rol_user value (2,"normal_user");
+insert into rol_user value (2,"normal user");
 
 insert into user value (1, "ruben", "contraseña", 1);
 
@@ -71,30 +33,30 @@ insert into type value (3, "accesorio");
 /*insert into article(id_type,name,ph,gh,description,temp,longevity,planted_in,stock,price) value (1, "Guppy", 5.5, 15, "El guppy es un pez ovovivíparo de agua dulce procedente 
 de Sudamérica que habita en zonas de corriente baja de ríos, lagos y charcas",28,"3 años", null, 30, 2.5);*/
 insert into article () value (1, 1, "Guppy", 5.5, 15, "El guppy es un pez ovovivíparo de agua dulce procedente 
-de Sudamérica que habita en zonas de corriente baja de ríos, lagos y charcas",28,"3 años", null, 30, 2.5);
+de Sudamérica que habita en zonas de corriente baja de ríos, lagos y charcas",28,3, null, 30, 2.5);
 
-insert into article value (2,1,"molly", 8.2, 20, "Robustos peces son conocidos por su rápida y fácil reproducción",28, "3 años", null, 30, 3);
+insert into article value (2,1,"molly", 8.2, 20, "Robustos peces son conocidos por su rápida y fácil reproducción",28, 3, null, 30, 3);
 
-insert into article value(3,1," neón",7.2,10,"Es un pequeño pez tropical de agua dulce, originario de américa del sur",26, "5 años", null, 50, 5);
+insert into article value(3,1," neón",7.2,10,"Es un pequeño pez tropical de agua dulce, originario de américa del sur",26, 5, null, 50, 5);
 
-insert into article value(4,1,"Tetra farolito",5.5,19,"Es un pez icónico para los aficionados al mundo de la acuariofilia",26,"5 años", null, 40,3);
+insert into article value(4,1,"Tetra farolito",5.5,19,"Es un pez icónico para los aficionados al mundo de la acuariofilia",26,5, null, 40,3);
 
-insert into article value(5,1,"Escalar",7.2,9,"Conocido por el pez angel de agua dulce", 26,"9años", null, 25,10);
+insert into article value(5,1,"Escalar",7.2,9,"Conocido por el pez angel de agua dulce", 26,9, null, 25,10);
 
 insert into article value(6,1,"apistograma macmasteri",6.5,4,"forman parte del grupo de los ciclidos enanos, los ciclidos construyen una de las principales familias de agua dulce",
-30,"5años", null, 10,20);
+30,5, null, 10,20);
 
 insert into article value(7,1,"apistograma cacatuoides",7,10,"El A. cacatuoides es un pequeño cíclido pero con un gran carácter,
-es importante tener dos o tres hembras por cada macho y dotar de unos 70 a 80 cm de terreno de acuario para cada macho.",27, "5 años", null, 20,17.4);
+es importante tener dos o tres hembras por cada macho y dotar de unos 70 a 80 cm de terreno de acuario para cada macho.",27, 5, null, 20,17.4);
 
 insert into article value(8,1,"Rasbora galaxy",7.5,12," Estos peces son ideales para nanoacuarios, presentan una natación central y 
-nadan en cardumen entre la vegetación",22, "5 años", null, 12,3.94);
+nadan en cardumen entre la vegetación",22, 5, null, 12,3.94);
 
 insert into article value(9,1,"Betta",7,10,"un pez especial para todos ya sea como pez de iniciación como para el sector de acuariofilos más experimentado.",
- 23,"6 años", null, 13, 19.86);
+ 23,6, null, 13, 19.86);
 
 insert into article value(10,1,"Ancistrus sp velo",7.5,12,"Un pez muy apreciado y de aspecto inconfundible con sus largas aletas 
-pectorales y caudal principalmente. Son tolerantes en cuanto al resto de habitantes",25,"10 años",null, 2,32.6);
+pectorales y caudal principalmente. Son tolerantes en cuanto al resto de habitantes",25,10,null, 2,32.6);
 
 insert into article value(11,2,"Lemna minor(lenteja de agua)",9,2,"La lemna minor se trata de una pequeña planta flotante",30, null, "superficie",100,1.5);
 insert into article value(12,2,"Vallisneria americana",6,12,"También conocida como vallisneria gigante ruba, una planta de acuario que aporta elegancia",25,null,"sustrato",46,2.95);
@@ -118,4 +80,5 @@ insert into article value(29,3,"Tubo 4x6mm (1 metro)",null,null,"Tubo transparen
 insert into article value(30,3,"Silicona para acuarios",null,null,"Silicona para hacer reparaciones en nuestro acuario",null,null,null,20,14.30);
 
 select * from article;
+select * from user;
 

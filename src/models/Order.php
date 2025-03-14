@@ -12,6 +12,18 @@
         public $address;
         public $totalOrderPrice;
 
+        public function __construct(
+            $idOrder = NULL,
+            $idUser = NULL,
+            $address = NULL,
+            $totalOrderPrice = NULL
+            ) {
+            $this->idOrder = $idOrder;
+            $this->idUser = $idUser;
+            $this->address = $address;
+            $this->totalOrderPrice = $totalOrderPrice;
+        }
+
         public function getIdOrder() {
             return $this->idOrder;
         }

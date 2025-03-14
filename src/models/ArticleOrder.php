@@ -14,6 +14,20 @@
         public $quantity;
         public $totalArticlePrice;
 
+        public function __construct(
+            $idArticleOrder = NULL,
+            $idArticle = NULL,
+            $idOrder = NULL,
+            $quantity = NULL,
+            $totalArticlePrice = NULL
+            ) {
+            $this->idArticleOrder = $idArticleOrder;
+            $this->idArticle = $idArticle;
+            $this->idOrder = $idOrder;
+            $this->quantity = $quantity;
+            $this->totalArticlePrice = $totalArticlePrice;
+        }
+
         public function getIdArticleOrder() {
             return $this->idArticleOrder;
         }

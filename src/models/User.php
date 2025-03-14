@@ -6,12 +6,23 @@
         static $USER_NAME = 'user_name';
         static $PASSWORD = 'password';
         static $ID_ROL_USER = 'id_rol_user';
-
         
         public $idUser;
         public $userName;
         public $password;
         public $idRolUser;
+
+        public function __construct(
+            $idUser = NULL,
+            $userName = NULL,
+            $password = NULL,
+            $idRolUser = NULL
+        ) {
+            $this->idUser = $idUser;
+            $this->userName = $userName;
+            $this->password = $password;
+            $this->idRolUser = $idRolUser;
+        }
 
         public function getIdUser() {
             return $this->idUser;
@@ -44,6 +55,15 @@
         public function setIdRolUser($idRolUser): void {
             $this->idRolUser = $idRolUser;
         }
+
+        public function save(){
+            $sql = "INSERT INTO users('user_name','password','id_rol_user') 
+            values('{$this->getUserName()}','{$this->getPassword()}','2')";
+            $resultado = mysqli_query(DB::connect(),$sql);
+
+        }
+
+
 
     }
 

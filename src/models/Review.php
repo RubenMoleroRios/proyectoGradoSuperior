@@ -12,6 +12,18 @@
         public $idArticle;
         public $star;
 
+        public function __construct(
+            $idReview = NULL,
+            $opinion = NULL,
+            $idArticle = NULL,
+            $star = NULL
+            ) {
+            $this->idReview = $idReview;
+            $this->opinion = $opinion;
+            $this->idArticle = $idArticle;
+            $this->star = $star;
+        }
+
         public function getIdReview() {
             return $this->idReview;
         }
