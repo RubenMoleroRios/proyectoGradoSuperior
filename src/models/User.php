@@ -56,14 +56,6 @@
             $this->idRolUser = $idRolUser;
         }
 
-        public function save(){
-            $sql = "INSERT INTO users('user_name','password','id_rol_user') 
-            values('{$this->getUserName()}','{$this->getPassword()}','2')";
-            $resultado = mysqli_query(DB::connect(),$sql);
-
-        }
-
-
 
     }
 

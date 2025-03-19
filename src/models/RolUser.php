@@ -15,8 +15,16 @@
             $this->name = $name;
         }
 
+        public function getId(){
+            return $this->id;
+        }        
+
         public function getName() {
             return $this->name;
+        }
+
+        public function setId($id): void{
+            $this->id = $id;
         }
 
         public function setName($name): void {
@@ -24,11 +32,11 @@
         }
 
         public function isAdmin(){
-            return idRolUser == RolUser::$ID_ADMIN;
+            return $idRolUser == RolUser::$ID_ADMIN;
         }
 
         public function isNormalUser(){
-            return idRolUser == RolUser::$ID_NORMAL_USER;
+            return $idRolUser == RolUser::$ID_NORMAL_USER;
         }
         
     }
