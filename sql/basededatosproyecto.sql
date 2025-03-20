@@ -10,7 +10,7 @@ drop table type;
 
 use allblue;
 create table `rol_user` (id_rol_user int primary key auto_increment, name varchar(20));
-create table `user` (id_user int primary key auto_increment, user_name varchar(45), password varchar(45), id_rol_user int, foreign key (id_rol_user) references rol_user(id_rol_user));
+create table `user` (id_user int primary key auto_increment, email varchar(45) unique, user_name varchar(45), password varchar(45), id_rol_user int, foreign key (id_rol_user) references rol_user(id_rol_user));
 create table `order` (id_order int primary key auto_increment, id_user int, address varchar(100), total_order_price double, foreign key(id_user) references user(id_user));
 create table `type` (id_type int primary key auto_increment, name varchar(45));
 
@@ -24,7 +24,7 @@ create table `review` (id_review int primary key auto_increment, opinion varchar
 insert into rol_user value (1,"admin");
 insert into rol_user value (2,"normal user");
 
-insert into user value (1, "ruben", "contraseña", 1);
+insert into user value (1, "ruben@hotmail.com","ruben", "contraseña", 1);
 
 insert into type value (1, "pez");
 insert into type value (2, "planta");

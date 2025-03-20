@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./public/style/style.css" media="screen">
-        <title>All blue</title>
-    </head>
+    <?php
+        include_once "./view/includes/head.php";
+    ?>
     <body>
         <?php
         include_once "./view/includes/header.php";
@@ -27,6 +24,8 @@
                 */
 
 
+
+            include_once "./view/includes/footer.php";
         ?>
         <script src="./public/js/main.js"></script>
     </body>
