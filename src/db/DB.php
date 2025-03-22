@@ -1,5 +1,5 @@
 <?php
-include_once "database.php";
+include_once "./src/config/database.php";
 include_once "./include.php";
 
 class DB {
@@ -11,8 +11,6 @@ class DB {
         $connection->query("SET NAMES 'utf8'");
         if (!$connection) {
             die("No se ha podido conectar" . mysqli_connect_error());
-        }else {
-            print("se ha conectado correctamente.");
         }
         return $connection;
     }
@@ -54,7 +52,7 @@ class DB {
         $sql = "SELECT * FROM article where ".Article::$ID." = ".$id;    
         $result = mysqli_query($connection, $sql);
         $article = mysqli_fetch_assoc($result);
-        $articleObtained = [];
+        $articleObtained = null;
         if($article != NULL){
             $articleObtained = new Article(
                 $article[Article::$ID],
@@ -226,10 +224,11 @@ class DB {
         if (mysqli_num_rows($result) > 0) {            
             foreach ($result as $user) {
                 $users[] = new User(
-                    $user[User::$ID_USER],
-                    $user[User::$USER_NAME],
-                    $user[User::$PASSWORD],
-                    $user[USER::$ID_ROL_USER]
+                    idUser: $user[User::$ID_USER],
+                    email: $user[User::$EMAIL],
+                    userName: $user[User::$USER_NAME],  
+                    password: $user[User::$PASSWORD],
+                    idRolUser: $user[USER::$ID_ROL_USER]
                 );
             }            
         }
@@ -241,16 +240,34 @@ class DB {
         $sql = "SELECT * FROM user where ".User::$ID_USER."=".$idUser;        
         $result = mysqli_query($connection, $sql);
         $user = mysqli_fetch_assoc($result);
-        $userObtained = [];
+        $userObtained = null;
         if($user != NULL){
             $userObtained = new User(
-                $user[User::$ID_USER],
-                $user[User::$USER_NAME],
-                $user[User::$PASSWORD],
-                $user[User::$ID_ROL_USER]
+                idUser: $user[User::$ID_USER],
+                email: $user[User::$EMAIL],
+                userName: $user[User::$USER_NAME],
+                password: $user[User::$PASSWORD],
+                idRolUser: $user[User::$ID_ROL_USER]
             );                        
         }
         return $userObtained;
+    }
+
+    public static function loginUser($email, $password): false|User{
+        $connection = DB::getConection();
+        $sql = "SELECT * FROM user WHERE ".User::$EMAIL." like '".$email."' and ".USER::$PASSWORD." like '".$password."' and ".User::$ID_ROL_USER." = ".RolUser::$ID_NORMAL_USER.";";
+        $login = mysqli_query(mysql: $connection,query: $sql);
+        $userLogin = mysqli_fetch_assoc(result: $login);
+        if($userLogin != NULL){
+            return new User(
+                idUser: $userLogin[User::$ID_USER],
+                email: $userLogin[User::$EMAIL],
+                userName: $userLogin[User::$USER_NAME],
+                password: $userLogin[User::$PASSWORD],
+                idRolUser: $userLogin[User::$ID_ROL_USER]
+            );  
+        }
+        return false;
     }
 
     
@@ -331,6 +348,7 @@ class DB {
         $sql = "INSERT into user values (
             null,'".
             $user->getUserName()."','".
+            $user->getEmail()."','".
             $user->getPassword()."',".
             RolUser::$ID_NORMAL_USER.
             ")";
@@ -382,6 +400,17 @@ class DB {
         $result = mysqli_query($connection,$sql);
     }
 
+
+    public static function loginAdmin($email, $password): false|User{
+        $connection = DB::getConection();
+        $sql = "SELECT * FROM user WHERE ".User::$EMAIL." like '".$email."' and ".USER::$PASSWORD." like '".$password."' and ".User::$ID_ROL_USER." = ".RolUser::$ID_ADMIN.";";
+        $login = mysqli_query($connection,$sql);
+        
+        return  mysqli_num_rows($login)==1 ? $login->fetch_object() : false;
+    }
+
+    
+    
     
 
     public static function updateArticle(Article $article){ 

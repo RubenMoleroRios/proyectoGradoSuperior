@@ -1,6 +1,10 @@
+
 <!DOCTYPE html>
+
 <html lang="es">
     <?php
+        session_start();
+
         include_once "./view/includes/head.php";
     ?>
     <body>
@@ -14,15 +18,31 @@
 
         <?php
              include_once "./include.php";
-            /*
-            $sql = "SELECT * FROM article where id_article = '1'";
-            $resultado = mysqli_query(connect(),$sql);
+    
+             if(isset($_GET['controller'])){
+                 $nombreControlador = $_GET['controller'].'Controller';
 
-            while($fila = mysqli_fetch_row($resultado)){
-                echo "<br/>$fila[2]";
-            }
-                */
+                 if(isset($nombreControlador) && class_exists($nombreControlador)){
 
+                    $controlador = new $nombreControlador();
+            
+                    if(isset($_GET['action']) && method_exists($controlador,$_GET['action'])){
+                        $action = $_GET['action'];
+                        $controlador->$action();
+            
+                    }else{
+                        echo "La página que buscas no existe. 2";
+                    }
+            
+                }else{
+                    echo "La página que buscas no existe. 3";
+                }
+             }
+
+             echo '<pre>'.var_export($_SESSION,true).'</pre>';
+             
+          
+      
 
 
             include_once "./view/includes/footer.php";

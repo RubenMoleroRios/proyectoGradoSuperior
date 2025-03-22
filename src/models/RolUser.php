@@ -32,11 +32,11 @@
         }
 
         public function isAdmin(){
-            return $idRolUser == RolUser::$ID_ADMIN;
+            return $this->idRolUser == RolUser::$ID_ADMIN;
         }
 
         public function isNormalUser(){
-            return $idRolUser == RolUser::$ID_NORMAL_USER;
+            return $this->idRolUser == RolUser::$ID_NORMAL_USER;
         }
         
     }

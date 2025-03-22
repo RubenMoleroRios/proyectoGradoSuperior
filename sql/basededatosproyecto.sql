@@ -24,7 +24,8 @@ create table `review` (id_review int primary key auto_increment, opinion varchar
 insert into rol_user value (1,"admin");
 insert into rol_user value (2,"normal user");
 
-insert into user value (1, "ruben@hotmail.com","ruben", "contraseña", 1);
+insert into user value (1, "admin@hotmail.com","ruben", "contraseña", 1);
+insert into user value (2, "client@hotmail.com","ruben", "contraseña", 2);
 
 insert into type value (1, "pez");
 insert into type value (2, "planta");
@@ -78,10 +79,4 @@ insert into article value(27,3,"Paridera interor",null,null,"Paridera para que n
 insert into article value(28,3,"Ventosas clip verde 2unidades",null,null,"ventosas para sujetar nuestros tubos, calentador, etc",null,null,null,50,1.5);
 insert into article value(29,3,"Tubo 4x6mm (1 metro)",null,null,"Tubo transparente para mover agua",null,null,null,60,0.5);
 insert into article value(30,3,"Silicona para acuarios",null,null,"Silicona para hacer reparaciones en nuestro acuario",null,null,null,20,14.30);
-
-select * from article;
-select * from user;
-select * from rol_user;
-SELECT * FROM user where id_user=1;
-
 

@@ -28,14 +28,16 @@ $conexion::insertArticle($articleAdd);
 
 
 echo "<h1> Usuarios</h1>";
+/*
 echo "<h3>Aquí añadimos usuarios</h3>";
 $userAdd = new User(
     userName:"ruben23",
     password:"9nmjmdeer"
 );         
 $conexion::insertUser($userAdd);
+*/
 //$users = $conexion->getUsers();
-echo '<pre>'.var_export($userAdd,true).'</pre>';
+//echo '<pre>'.var_export($userAdd,true).'</pre>';
 
 echo "<h3>Aquí listamos un usuario </h3>";
 $idUser =1;
@@ -44,18 +46,18 @@ echo '<pre>'.var_export($usuario,true).'</pre>';
 
 
 echo "<h3>Aquí borramos un usuarios </h3>";
-$delUser = new User(
+/*$delUser = new User(
     idUser:2,
 );
 $conexion::deleteUser($delUser);
-
-
+*/
+/*
 echo "<h3>Aquí modificamos un usuario </h3>";
 $usuario->setUserName("efraino");
 $usuario->setPassword("");
 echo '<pre>'.var_export($usuario,true).'</pre>';
 $modUsuario = $conexion::updateUser($usuario);
-
+*/
 
 
 
@@ -107,6 +109,19 @@ echo '<pre>'.var_export($articuloListado,true).'</pre>';
 
 
 
+echo "<h1>Prueba de login</h1>";
+echo "<h3>Aquí logueamos usuario normal</h3>";
+$usuarioLogueado = $conexion::loginUser("normal@hotmail.com","contraseña");
+echo '<pre>'.var_export($usuarioLogueado,true).'</pre>';
+
+echo "<h3>Aquí logueamos usuario administrador</h3>";
+$usuarioLogueado = $conexion::loginAdmin("ruben@hotmail.com","contraseña");
+echo '<pre>'.var_export($usuarioLogueado,true).'</pre>';
+
+
+
+$userControler = new UserController();
+$login = $userControler->login()
 
 
 
