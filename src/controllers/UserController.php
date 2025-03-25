@@ -7,22 +7,30 @@
             echo "Controlador usuario, acción index";
         }
 
-        public function login(){   
-            echo "echo 1";
+        public function clientLogin(): void{
             if(isset($_POST)){
                 $connection = new DB();
-                $login = $connection::loginUser(email: $_POST['email'],password: $_POST['password']);
-                echo "echo 2";
-                if($login) {
-                    echo "echo 3";
-                        $_SESSION['login'] = $login;
-                    
+                $login = $connection::loginUser(email: $_POST['email'],password: $_POST['password']);                
+                if($login) {      
+                    $_SESSION['clientLogin'] =  serialize(value: $login);                                                              
                 }
             }else{
-                    $_SESSION['error_login'] = 'Identificación errónea';
+                $_SESSION['error_login'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';
+            }            
+            header(header: "Location: ".base_url_shop);
+        }
+
+        public function adminLogin(): void{       
+            if(isset($_POST)){
+                $connection = new DB();
+                $login = $connection::loginAdmin(email: $_POST['email'],password: $_POST['password']);
+                if($login) {        
+                    $_SESSION['adminLogin'] = serialize(value: $login);                          
+                }
+            }else{
+                $_SESSION['error_login'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';
             }
-            echo "echo 4";
-            //header("Location: ".base_url_shop);
+            header(header: "Location: ".base_url_shop);
         }
 
     }

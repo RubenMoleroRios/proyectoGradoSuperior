@@ -16,7 +16,7 @@
         }
 
         public function getId(){
-            return $this->id;
+            return $this->idRolUser;
         }        
 
         public function getName() {

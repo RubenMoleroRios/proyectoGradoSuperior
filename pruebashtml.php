@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="e">
+<html lang="es">
     <?php
         include_once "./view/includes/head.php";
     ?>
