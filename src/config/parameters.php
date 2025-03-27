@@ -1,8 +1,6 @@
 <?php
 
-    define("base_url_shop","http://localhost/proyectoGradoSuperior/");
-    define("base_url_admin ","http://localhost/proyectoGradoSuperior/admin/");
-
-    
+    define(constant_name: "base_url_shop",value: "http://localhost/proyectoGradoSuperior/");
+    define(constant_name: "base_url_admin ",value: "http://localhost/proyectoGradoSuperior/admin/");
 
 ?>

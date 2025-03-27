@@ -27,15 +27,25 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="<?=base_url_shop?>" class="nav-link px-2 link-secondary" >Inicio</a></li>
-                <li><a href="#" class="nav-link px-2">Peces</a></li>
+                <li><a href="" class="nav-link px-2">Peces</a></li>
                 <li><a href="#" class="nav-link px-2">Plantas</a></li>
                 <li><a href="#" class="nav-link px-2">Accesorios</a></li>                
             </ul>
 
             <div class="col-md-3 text-end">
-                <a href="<?=base_url_shop?>view/usuario/login.php" class="btn btn-outline-primary me-2">Login</a>
-                <a href="<?=base_url_shop?>view/usuario/logout.php" class="btn btn-outline-primary me-2">Logout</a>
-                <button type="button" class="btn btn-primary">Registrarse</button>
+                <?php                       
+                    if (!isset($_SESSION["loginClient"])) {
+                ?>            
+                    <a href="<?=base_url_shop?>view/usuario/login.php" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="<?=base_url_shop?>view/usuario/registro.php" class="btn btn-primary">Registrarse</a>
+                <?php
+                    }else{
+                ?>
+                    <a href="<?=base_url_shop?>view/usuario/logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                <?php
+                    }
+                ?>
+                
             </div>
         </header>
     </div>

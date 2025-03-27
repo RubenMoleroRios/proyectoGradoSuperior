@@ -6,7 +6,7 @@ class DB {
         
     private static $connection;
 
-    private static function connect() {
+    private static function connect(): bool|mysqli {
         $connection = mysqli_connect(hostname: HOST, username: USER, password: PASSWORD, database: DATABASE);
         $connection->query(query: "SET NAMES 'utf8'");
         if (!$connection) {
@@ -15,7 +15,7 @@ class DB {
         return $connection;
     }
 
-    private static function getConection(){        
+    private static function getConection(): bool|mysqli{        
         if(!DB::$connection){
             DB::$connection = DB::connect();      
         }        
@@ -136,7 +136,7 @@ class DB {
         $sql = "SELECT * FROM review,";
         $result = mysqli_query(mysql: $connection,query: $sql);
         $reviews = [];
-        if(mysqli_num_rows($result) > 0){
+        if(mysqli_num_rows(result: $result) > 0){
             foreach($result as $review){
                 $reviews[] = new Review(
                     idReview: $review[Review::$ID_REVIEW],
@@ -253,10 +253,6 @@ class DB {
         return $userObtained;
     }
 
-    
-
-    
-
     public static function insertArticle(Article $article): void{
         $connection = DB::getConection();
         $sql = "INSERT into article values (
@@ -328,16 +324,44 @@ class DB {
         $result = mysqli_query(mysql: $connection, query: $sql);
     }
 
+    /*
+    public static function comprobarEmail(User $user): true|false{
+        $connection = DB::getConection();        
+        $selectEmail = "SELECT ".User::$EMAIL." from user where ".User::$EMAIL." = '".$_POST["email"]."';";
+        $verify = mysqli_query(mysql:$connection, query: $selectEmail);
+        $resultEmail = mysqli_fetch_row(result: $verify);
+        if($resultEmail[0] == 1){
+            throw new Exception(message: "Correo repetido");            
+        }else{            
+            header(header: "Location: ../view/usuario/registro.php");
+            echo "<h1>Email Repetido</h1>";            
+        }
+        return true;
+    }
+        */
     public static function insertUser(User $user): void{
-        $connection = DB::getConection();
-        $sql = "INSERT into user values (
-            null,'".
-            $user->getUserName()."','".
-            $user->getEmail()."','".
-            $user->getPassword()."',".
-            RolUser::$ID_NORMAL_USER.
-            ")";
-        $result = mysqli_query(mysql: $connection, query: $sql);
+        $connection = DB::getConection();        
+        /*$selectEmail = "SELECT ".User::$EMAIL." from user where ".User::$EMAIL." = '".$_POST["email"]."';";
+        $verify = mysqli_query(mysql:$connection, query: $selectEmail);
+        $resultEmail = mysqli_fetch_row(result: $verify);
+        if($resultEmail[0] == 0){*/
+        //try{
+            $sql = "INSERT into user values (
+                null,'".
+                $user->getEmail()."','".
+                $user->getUserName()."','".            
+                $user->getPassword()."',".
+                RolUser::$ID_NORMAL_USER.
+                ")";
+            mysqli_query(mysql: $connection, query: $sql);
+        /*}catch(Exception $e){
+            throw new Exception(message: "Correo repetido");
+        }
+        }else{            
+            header(header: "Location: ../view/usuario/registro.php");
+            echo "<h1>Email Repetido</h1>";            
+            die();
+        }*/
     } 
 
 
@@ -386,7 +410,7 @@ class DB {
     }
 
     public static function loginUser($email, $password): false|User{
-        $connection = DB::getConection();
+        $connection = DB::getConection();    
         $sql = "SELECT * FROM user WHERE ".User::$EMAIL." like '".$email."' and ".USER::$PASSWORD." like '".$password."' and ".User::$ID_ROL_USER." = ".RolUser::$ID_NORMAL_USER.";";
         $login = mysqli_query(mysql: $connection,query: $sql);
         $userLogin = mysqli_fetch_assoc(result: $login);
@@ -420,10 +444,6 @@ class DB {
         }
         return false;
     }
-
-    
-    
-    
 
     public static function updateArticle(Article $article): void{ 
         $connection = DB::getConection();

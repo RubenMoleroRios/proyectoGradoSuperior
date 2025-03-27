@@ -1,9 +1,12 @@
 <?php
+if (!isset($_SESSION)) {
+  session_start();
+}
     include_once "../../src/config/parameters.php";    
 ?>
 
 <html 
-  lang="en" data-bs-theme="dark">
+  lang="es" data-bs-theme="dark">
 
   <head>    
     <meta charset="utf-8">
@@ -99,30 +102,29 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="../../public/style/sign-in.css" rel="stylesheet"></head>
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
-      
+  <body class="d-flex align-items-center py-4 bg-body-tertiary" id="login">      
     <main class="form-signin w-100 m-auto">
-      <form method="POST" action="<?=base_url_shop?>User/clientLogin">
+      <form method="POST" action="<?=base_url_shop?>User/loginClient">
         <img class="mb-4" src="../../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
-          <input type="email" name="email" class="form-control" id="floatingInput"  placeholder="name@example.com">
+          <input type="email" name="email" class="form-control">
           <label for="floatingInput">Email</label>
         </div>
         <div class="form-floating">
-          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" name="password" class="form-control">
           <label for="floatingPassword">Contraseña</label>
-        </div>
-
-        <div class="form-check text-start my-3">
-          <input class="form-check-input" type="checkbox" value="recuerdame" id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            Recuérdame
-          </label>
-        </div>
+        </div>        
         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
+        <div class="invalid-feedback d-block">
+            <?php
+              if (isset($_SESSION['errorLogin'])){                    
+                echo $_SESSION['errorLogin'];
+                unset($_SESSION['errorLogin']);
+              }
+            ?>
+          </div>
       </form>
     </main>
   </body>

@@ -7,6 +7,11 @@
 
             require_once "./view/Article/important.php";
         }  
+
+
+        public function showMenu(): void{
+
+        }
     }
 
 ?>

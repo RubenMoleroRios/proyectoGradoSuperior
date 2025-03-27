@@ -2,7 +2,7 @@
     include_once "./view/includes/header.php";
     include_once "./include.php";
     
-
+            
     if(isset($_GET['controller'])){
         $controllerName = $_GET['controller'].'Controller';
         if(isset($controllerName) && class_exists(class: $controllerName)){
@@ -17,9 +17,11 @@
             echo "La página que buscas no existe. 3";
         }
     }
-    //$obj = unserialize(data: $_SESSION['clientLogin']);
-    //echo '<pre>'.var_export(value: $obj,return: true).'</pre>';                              
-                
+    /*$obj = unserialize(data: $_SESSION['loginAdmin']);
+    echo '<pre>'.var_export(value: $obj,return: true).'</pre>';                              
+    $obj2 = unserialize(data: $_SESSION['loginClient']);
+    echo '<pre>'.var_export(value: $obj2,return: true).'</pre>';                              
+      */              
     include_once "./view/includes/footer.php";
 ?>
        
