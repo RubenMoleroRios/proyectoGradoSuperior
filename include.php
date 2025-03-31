@@ -14,4 +14,6 @@
     include_once "./src/models/TypeArticle.php";
     include_once "./src/models/User.php";
     include_once "./src/config/parameters.php";
+
+    include_once "./src/controllers/TypeController.php";
 ?>

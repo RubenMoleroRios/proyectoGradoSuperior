@@ -16,12 +16,7 @@
         }else{
             echo "La página que buscas no existe. 3";
         }
-    }
-    /*$obj = unserialize(data: $_SESSION['loginAdmin']);
-    echo '<pre>'.var_export(value: $obj,return: true).'</pre>';                              
-    $obj2 = unserialize(data: $_SESSION['loginClient']);
-    echo '<pre>'.var_export(value: $obj2,return: true).'</pre>';                              
-      */              
+    }      
     include_once "./view/includes/footer.php";
 ?>
        

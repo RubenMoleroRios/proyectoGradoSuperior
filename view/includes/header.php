@@ -6,7 +6,7 @@
         }
         include_once "./include.php";
     ?>        
-        <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./public/style/style.css" media="screen">
@@ -14,8 +14,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
-
-
 
     <div class="container-fluid">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -26,10 +24,16 @@
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="<?=base_url_shop?>" class="nav-link px-2 link-secondary" >Inicio</a></li>
-                <li><a href="" class="nav-link px-2">Peces</a></li>
-                <li><a href="#" class="nav-link px-2">Plantas</a></li>
-                <li><a href="#" class="nav-link px-2">Accesorios</a></li>                
+                <li><a href="<?=base_url_shop?>" class="nav-link px-2 link-secondary">Inicio</a></li>                
+                <?php
+                    $typeController = new TypeController();
+                    $types = $typeController->showMenu();
+                    foreach ($types as $type ) {
+                ?>
+                    <li><a href="<?=base_url_shop?>types.php?id=<?=$type->getIdType();?>" class="nav-link px-2"><?=$type->getNameType();?></a></li>
+                <?php
+                    }
+                ?>             
             </ul>
 
             <div class="col-md-3 text-end">
@@ -44,8 +48,7 @@
                     <a href="<?=base_url_shop?>view/usuario/logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php
                     }
-                ?>
-                
+                ?>                
             </div>
         </header>
     </div>

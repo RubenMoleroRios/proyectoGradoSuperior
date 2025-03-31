@@ -27,9 +27,9 @@ insert into rol_user value (2,"normal user");
 insert into user value (1, "admin@hotmail.com","ruben", "contraseña", 1);
 insert into user value (2, "client@hotmail.com","ruben", "contraseña", 2);
 
-insert into type value (1, "pez");
-insert into type value (2, "planta");
-insert into type value (3, "accesorio");
+insert into type value (1, "Peces");
+insert into type value (2, "Plantas");
+insert into type value (3, "Accesorios");
 
 /*insert into article(id_type,name,ph,gh,description,temp,longevity,planted_in,stock,price) value (1, "Guppy", 5.5, 15, "El guppy es un pez ovovivíparo de agua dulce procedente 
 de Sudamérica que habita en zonas de corriente baja de ríos, lagos y charcas",28,"3 años", null, 30, 2.5);*/
