@@ -3,7 +3,7 @@
     class TypeController{ 
 
         public function index(): void{
-            require_once "./view/Article/types.php";
+            require_once "./view/Type/types.php";
         }
 
         public function showMenu(): array{
