@@ -6,11 +6,9 @@
 
     $typeController = new TypeController();
     $type = $typeController->showType();
-        ?>
-        <h1><?= $type->getNameType()?></h1>
-        <a?php        
 ?>
-<h1></h1>
+    <h1><?= $type->getNameType()?></h1>
+        
 <div class="container">
     <div class="row mb-3 text-center">       
     <?php  
