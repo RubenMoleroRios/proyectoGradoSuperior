@@ -1,17 +1,27 @@
 <?php    
     include_once "./include.php";
-    class TypeController{
+    class TypeController{ 
+
         public function index(): void{
-            echo "Controlador usuario, acción index";
-
-            require_once "./view/Article/important.php";
-        }  
-
+            require_once "./view/Article/types.php";
+        }
 
         public function showMenu(): array{
             $connection = new DB();            
-            return $connection::getTypeArticle();
+            return $connection::getTypeArticles();
         }
+
+        public function showType(): TypeArticle {
+            $connection = new DB();                        
+            return $connection::getTypeArticleById(id:(int)$_GET["id"]);                        
+        }
+
+        public function showArticlesByTypeId(): array{
+            $connection = new DB();
+            return $connection::getArticlesByType(idType: (int)$_GET["id"]);
+        }
+
+
     }
 
 ?>

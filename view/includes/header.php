@@ -24,13 +24,13 @@
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="<?=base_url_shop?>" class="nav-link px-2 link-secondary">Inicio</a></li>                
+                <li><a href="<?=indexUrl?>" class="nav-link px-2 link-secondary">Inicio</a></li>                
                 <?php
                     $typeController = new TypeController();
                     $types = $typeController->showMenu();
                     foreach ($types as $type ) {
                 ?>
-                    <li><a href="<?=base_url_shop?>types.php?id=<?=$type->getIdType();?>" class="nav-link px-2"><?=$type->getNameType();?></a></li>
+                    <li><a href="<?=base_url_shop?>Type/index&id=<?=$type->getIdType();?>" class="nav-link px-2"><?=$type->getNameType();?></a></li>
                 <?php
                     }
                 ?>             
@@ -44,7 +44,7 @@
                     <a href="<?=base_url_shop?>view/usuario/registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
                     }else{
-                ?>
+                ?>  
                     <a href="<?=base_url_shop?>view/usuario/logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php
                     }

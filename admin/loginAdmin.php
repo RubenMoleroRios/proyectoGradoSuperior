@@ -116,6 +116,12 @@
           <label for="floatingPassword">Contraseña</label>
         </div>
         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <?php
+          if (isset($_SESSION['errorLogin'])){                    
+            echo $_SESSION['errorLogin'];
+            unset($_SESSION['errorLogin']);
+          }
+        ?>
       </form>
     </main>
 

@@ -73,8 +73,33 @@ class DB {
                                                         //Aquí indicamos que devuelve un array
     public static function getArticlesByType(int $idType): array {        
         $connection = DB::getConection();
-        $sql = "SELECT * FROM article where ".Article::$ID." = ".$idType;     
+        $sql = "SELECT * FROM article where ".Article::$ID_TYPE." = ".$idType;     
         $result = mysqli_query(mysql: $connection, query: $sql);
+        $articles = [];
+        if (mysqli_num_rows(result: $result) > 0) {            
+            foreach ($result as $article) {                                    
+                $articles[] = new Article(
+                    id: $article[Article::$ID],
+                    idType: $article[Article::$ID_TYPE],
+                    name: $article[Article::$NAME],
+                    ph: $article[Article::$PH],
+                    gh: $article[Article::$GH],
+                    description: $article[Article::$DESCRIPTION],
+                    temp: $article[Article::$TEMP],
+                    longevityInYears: $article[Article::$LONGEVITY_IN_YEARS],
+                    plantedIn: $article[Article::$PLANTED_IN],
+                    stock: $article[Article::$STOCK],
+                    price: $article[Article::$PRICE]                    
+                );
+            }                                  
+        } 
+        return $articles;
+    }
+
+    public static function getArticlesRandomByTypes(int $idType, int $limit): array{
+        $connection = DB::getConection();
+        $sql = "SELECT * FROM article where ".Article::$ID_TYPE." = ".$idType." ORDER BY RAND() LIMIT ".$limit;
+        $result = mysqli_query(mysql: $connection, query: $sql);        
         $articles = [];
         if (mysqli_num_rows(result: $result) > 0) {            
             foreach ($result as $article) {                                    
@@ -200,7 +225,7 @@ class DB {
         return $roles;        
     }
 
-    public static function getTypeArticle(): array {
+    public static function getTypeArticles(): array {
         $connection = DB::getConection();
         $sql = "SELECT * FROM type ;";
         $result = mysqli_query(mysql: $connection, query: $sql);
@@ -214,6 +239,22 @@ class DB {
             }
         }
         return $types;        
+    }
+
+    public static function getTypeArticleById(int $id): TypeArticle{
+        $connection = DB::getConection();
+        $sql = "SELECT * FROM type where ".TypeArticle::$ID_TYPE." = ".$id;
+        $result = mysqli_query(mysql: $connection, query: $sql);
+        $typeSelected = null;
+        if (mysqli_num_rows(result: $result) > 0) {
+            foreach ($result as $type) {
+                $typeSelected = new TypeArticle(
+                    idType: $type[TypeArticle::$ID_TYPE], 
+                    nameType: $type[TypeArticle::$NAME_TYPE]
+                );
+            }
+        }
+        return $typeSelected;
     }
 
     public static function getUsers(): array {

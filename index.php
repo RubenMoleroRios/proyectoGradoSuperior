@@ -16,7 +16,9 @@
         }else{
             echo "La página que buscas no existe. 3";
         }
-    }      
+    }else {
+        header(header: "Location: ".indexUrl);
+    }
     include_once "./view/includes/footer.php";
 ?>
        

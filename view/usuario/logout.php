@@ -4,5 +4,5 @@
         session_start();
     }
     session_destroy();
-    header(header: "Location: ".base_url_shop);
+    header(header: "Location: ".indexUrl);
 ?>

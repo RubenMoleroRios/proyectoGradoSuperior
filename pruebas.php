@@ -26,6 +26,11 @@ $articles = $conexion::getArticlesById(2);
 $conexion::insertArticle($articleAdd);
 */
 
+echo "<h3>Aquí listamos los articulos aleatorios ordenados por tipo</h3>";
+$articulosRandomByType = $conexion::getArticlesRandomByTypes(idType: 1,limit: 3);
+echo '<pre>'.var_export($articulosRandomByType,true).'</pre>';
+
+
 
 echo "<h1> Usuarios</h1>";
 /*
@@ -118,10 +123,6 @@ echo "<h3>Aquí logueamos usuario administrador</h3>";
 $usuarioLogueado = $conexion::loginAdmin("ruben@hotmail.com","contraseña");
 echo '<pre>'.var_export($usuarioLogueado,true).'</pre>';
 
-
-
-$userControler = new UserController();
-$login = $userControler->login()
 
 
 

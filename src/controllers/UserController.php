@@ -13,11 +13,11 @@
                 $login = $connection::loginAdmin(email: $_POST['email'],password: $_POST['password']);
                 if($login) {        
                     $_SESSION['loginAdmin'] = serialize(value: $login);                          
-                    header(header: "Location: ".base_url_shop);
+                    header(header: "Location: ".base_url_admin."indexAdmin.php");
                 }
             }else{
                 $_SESSION['error_login'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';
-                header(header: "Location: ".base_url_admin);
+                header(header: "Location: ".base_url_admin."login.php");
             }            
         }
 
@@ -27,7 +27,7 @@
                 $login = $connection::loginUser(email: $_POST['email'],password: $_POST['password']);                        
                 if($login) {      
                     $_SESSION['loginClient'] =  serialize(value: $login);                                                                           
-                    header(header: "Location: ".base_url_shop);
+                    header(header: "Location: ".indexUrl);
                 }else{
                     $_SESSION['errorLogin'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';
                     header(header: "Location: ".base_url_shop."view/usuario/login.php");
