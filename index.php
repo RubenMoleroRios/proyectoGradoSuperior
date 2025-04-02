@@ -2,7 +2,6 @@
     include_once "./view/includes/header.php";
     include_once "./include.php";
     
-            
     if(isset($_GET['controller'])){
         $controllerName = $_GET['controller'].'Controller';
         if(isset($controllerName) && class_exists(class: $controllerName)){

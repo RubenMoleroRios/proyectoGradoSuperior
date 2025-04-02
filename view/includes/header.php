@@ -43,8 +43,9 @@
                     <a href="<?=base_url_shop?>view/usuario/login.php" class="btn btn-outline-primary me-2">Login</a>
                     <a href="<?=base_url_shop?>view/usuario/registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
-                    }else{
+                    }else{                        
                 ?>  
+                    <div class="btn btn-outline-primary me-2"><?=unserialize(data: $_SESSION["loginClient"])->getUserName()?></div>
                     <a href="<?=base_url_shop?>view/usuario/logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php
                     }
