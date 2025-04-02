@@ -10,8 +10,12 @@
         $product = new ArticleController();
         $fishes = $product->getRandomFish();
         foreach ($fishes as $fish) {
-    ?>
-            <div class="col-4 col-sm-12 col-md-4 "><div><?=$fish->getName();?><br><?=$fish->getPrice();?>€</div></div>                
+    ?>  
+            <div class="col-4 col-sm-12 col-md-4 ">
+                <a href="<?=base_url_shop?>Type/article&id=<?=$fish->getId();?>">
+                    <div><?=$fish->getName();?><br><?=$fish->getFormatPrice();?></div>
+                </a>
+            </div>                
     <?php
         }
     ?>
@@ -22,7 +26,11 @@
         $plants = $product->getRandomPlant();
         foreach ($plants as $plant) {
     ?>
-            <div class="col-4 col-sm-12 col-md-4 "><div><?=$plant->getName();?><br><?=$plant->getPrice();?>€</div></div>                
+            <div class="col-4 col-sm-12 col-md-4 ">
+                <a href="<?=base_url_shop?>Type/article&id=<?=$plant->getId();?>">
+                    <div><?=$plant->getName();?><br><?=$plant->getFormatPrice();?></div>
+                </a>
+            </div>               
     <?php
         }
     ?>                                             
@@ -33,7 +41,11 @@
         $accesories = $product->getRandomAccesory();
         foreach ($accesories as $accesory) {
     ?>
-            <div class="col-4 col-sm-12 col-md-4 "><div><?=$accesory->getName();?><br><?=$accesory->getPrice();?>€</div></div>                
+           <div class="col-4 col-sm-12 col-md-4 ">
+                <a href="<?=base_url_shop?>Type/article&id=<?=$accesory->getId();?>">
+                    <div><?=$accesory->getName();?><br><?=$accesory->getFormatPrice();?></div>
+                </a>
+            </div>             
     <?php
         }
     ?>                                             

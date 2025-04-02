@@ -19,7 +19,7 @@
     ?>
             <div class="col-4 col-sm-12 col-md-4 ">
                 <a href="<?=base_url_shop?>Type/article&id=<?=$product->getId();?>">
-                    <div><?=$product->getName()?><br><?=$product->getPrice()?>€</div>
+                    <div><?=$product->getName()?><br><?=$product->getFormatPrice()?></div>
                 </a>
             </div>        
     <?php

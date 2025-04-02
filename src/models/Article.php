@@ -53,48 +53,53 @@
             $this->price = $price;
         }
 
-        public function getId() {
+        public function getId(): int|null {
             return $this->id;
         }
 
-        public function getIdType() {
+        public function getIdType(): int|null {
             return $this->idType;
         }
 
-        public function getName() {
+        public function getName(): string|null {
             return $this->name;
         }
 
-        public function getPh() {
+        public function getPh(): float|null {
             return $this->ph;
         }
 
-        public function getGh() {
+        public function getGh(): float|null {
             return $this->gh;
         }
 
-        public function getDescription() {
+        public function getDescription(): string|null {
             return $this->description;
         }
 
-        public function getTemp() {
+        public function getTemp(): int|null {
             return $this->temp;
         }
 
-        public function getLongevityInYears() {
+        public function getLongevityInYears(): int|null {
             return $this->longevityInYears;
         }
 
-        public function getPlantedIn() {
+        public function getPlantedIn(): string|null {
             return $this->plantedIn;
         }
 
-        public function getStock() {
+        public function getStock(): int|null {
             return $this->stock;
         }
 
-        public function getPrice() {
+        public function getPrice(): float|null {
             return $this->price;
+        }
+
+        
+        public function getFormatPrice(): string {
+            return $this->price." €";
         }
 
         public function setId($id): void {
