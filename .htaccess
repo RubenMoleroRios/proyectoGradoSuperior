@@ -7,5 +7,11 @@
     RewriteCond %{SCRIPT_FILENAME} !-f
 
     RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
+    ##RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
 
+    #RewriteRule ^admin/$ /indexAdmin.php?controller=$1&action=$2
+    #RewriteRule ^/$ /index.php?controller=$1&action=$2
+
+    #RewriteRule ^(.*)/proyectoGradoSuperior/(.*) /index.php?controller=$1&action=$2
+    #RewriteRule ^/$ /index.php?controller=$1&action=$2
 </IfModule>

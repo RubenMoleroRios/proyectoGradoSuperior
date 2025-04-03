@@ -3,11 +3,16 @@
     include_once "./include.php";
     class ArticleController{
         public function index(): void{
-            require_once "./view/Article/important.php";
+            require_once "./shop/view/article/featured-articles-view.php";
         }          
 
         public function article():void{
-            require_once ".view/Article/article.php";
+            require_once "./shop/view/article/articles-view.php";
+        }
+
+        public function showArticleById(): Article{
+            $connection = new DB();                        
+            return $connection::getArticleById(id:(int)$_GET["id"]);  
         }
 
         public function getRandomFish(): array{

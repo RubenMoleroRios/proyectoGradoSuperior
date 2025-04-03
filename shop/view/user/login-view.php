@@ -2,7 +2,8 @@
 if (!isset($_SESSION)) {
   session_start();
 }
-    include_once "../../src/config/parameters.php";    
+$_SESSION["app"] = "shop";
+include_once "../../../src/config/parameters.php";    
 ?>
 
 <html 
@@ -101,11 +102,11 @@ if (!isset($_SESSION)) {
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="../../public/style/sign-in.css" rel="stylesheet"></head>
+    <link href="../../../public/style/sign-in.css" rel="stylesheet"></head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary" id="login">      
     <main class="form-signin w-100 m-auto">
-      <form method="POST" action="<?=base_url_shop?>User/loginClient">
-        <img class="mb-4" src="../../public/image/ilerna.png" alt="" width="72" height="57">
+      <form method="POST" action="<?=base_url?>User/loginClient">
+        <img class="mb-4" src="../../../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">
@@ -116,7 +117,9 @@ if (!isset($_SESSION)) {
           <input type="password" name="password" class="form-control">
           <label for="floatingPassword">Contraseña</label>
         </div>        
-        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>        
+        <a href="<?=base_url_shop?>view/user/register-view.php" class="btn btn-primary w-100 py-2 mt-2">Registrarse</a>
+        <a href="<?=base_url?>" class="btn btn-primary w-100 py-2 mt-2" type="submit">Ir a la tienda</a>
         <div class="invalid-feedback d-block">
             <?php
               if (isset($_SESSION['errorLogin'])){                    

@@ -1,8 +1,9 @@
 <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    include_once "../src/config/parameters.php";
+if (!isset($_SESSION)) {
+  session_start();
+}
+$_SESSION["app"] = "admin";
+include_once "../src/config/parameters.php";
 ?>
 <html lang="en" data-bs-theme="dark">
   <head>
@@ -103,7 +104,7 @@
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
     <main class="form-signin w-100 m-auto">
-      <form method="POST" action="<?=base_url_shop?>User/loginAdmin">
+      <form method="POST" action="<?=base_url_base?>User/loginAdmin">
         <img class="mb-4" src="../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 

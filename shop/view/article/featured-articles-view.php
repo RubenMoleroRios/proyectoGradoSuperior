@@ -12,7 +12,7 @@
         foreach ($fishes as $fish) {
     ?>  
             <div class="col-4 col-sm-12 col-md-4 ">
-                <a href="<?=base_url_shop?>Type/article&id=<?=$fish->getId();?>">
+                <a href="<?=base_url?>Article/article&id=<?=$fish->getId();?>">
                     <div><?=$fish->getName();?><br><?=$fish->getFormatPrice();?></div>
                 </a>
             </div>                
@@ -27,7 +27,7 @@
         foreach ($plants as $plant) {
     ?>
             <div class="col-4 col-sm-12 col-md-4 ">
-                <a href="<?=base_url_shop?>Type/article&id=<?=$plant->getId();?>">
+            <a href="<?=base_url?>Article/article&id=<?=$plant->getId();?>">
                     <div><?=$plant->getName();?><br><?=$plant->getFormatPrice();?></div>
                 </a>
             </div>               
@@ -42,7 +42,7 @@
         foreach ($accesories as $accesory) {
     ?>
            <div class="col-4 col-sm-12 col-md-4 ">
-                <a href="<?=base_url_shop?>Type/article&id=<?=$accesory->getId();?>">
+           <a href="<?=base_url?>Article/article&id=<?=$accesory->getId();?>">
                     <div><?=$accesory->getName();?><br><?=$accesory->getFormatPrice();?></div>
                 </a>
             </div>             
