@@ -3,6 +3,6 @@
     if(!isset($_SESSION)){
         session_start();
     }
-    unset($_SESSION["loginClient"]);
-    header(header: "Location: ".indexUrl);
+    unset($_SESSION["auth_shop"]);
+    header(header: "Location: ".controller_action_index_shop);
 ?>

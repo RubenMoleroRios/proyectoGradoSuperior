@@ -1,12 +1,12 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+$_SESSION["app"] = "shop";
+include_once "./include.php";
+?>  
 <!DOCTYPE html>
-<html lang="es">
-    <?php
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        $_SESSION["app"] = "shop";
-        include_once "./include.php";
-    ?>        
+<html lang="es">      
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,13 +26,13 @@
                 </div>
 
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="<?=indexUrl?>" class="nav-link px-2 link-secondary">Inicio</a></li>                
+                    <li><a href="<?=controller_action_index_shop?>" class="nav-link px-2 link-secondary">Inicio</a></li>                
                     <?php
                         $typeController = new TypeController();
                         $types = $typeController->showMenu();
                         foreach ($types as $type ) {
                     ?>
-                        <li><a href="<?=base_url?>Type/index&id=<?=$type->getIdType();?>" class="nav-link px-2"><?=$type->getNameType();?></a></li>
+                        <li><a href="<?=url_base?>Type/index&id=<?=$type->getIdType();?>" class="nav-link px-2"><?=$type->getNameType();?></a></li>
                     <?php
                         }
                     ?>             
@@ -40,18 +40,18 @@
 
                 <div class="col-md-3 text-end">
                     <?php                       
-                        if (!isset($_SESSION["loginClient"])) {
+                        if (!isset($_SESSION["auth_shop"])) {
                     ?>            
-                        <a href="<?=base_url_shop?>view/user/login-view.php" class="btn btn-outline-primary me-2">Login</a>
-                        <a href="<?=base_url_shop?>view/user/register-view.php" class="btn btn-primary">Registrarse</a>
+                        <a href="<?=url_login_shop?>" class="btn btn-outline-primary me-2">Login</a>
+                        <a href="<?=url_base_shop?>view/auth/register-view.php" class="btn btn-primary">Registrarse</a>
                     <?php
                         }else{                        
                     ?>  
-                        <div class="btn btn-outline-primary me-2"><?=unserialize(data: $_SESSION["loginClient"])->getUserName()?></div>
-                        <a href="<?=base_url_shop?>view/user/logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                        <div class="btn btn-outline-primary me-2"><?=unserialize(data: $_SESSION["auth_shop"])->getUserName()?></div>
+                        <a href="<?=url_base_shop?>view/auth/logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <?php
                         }
-                    ?>                
+                    ?>               
                 </div>
             </header>
         </div>

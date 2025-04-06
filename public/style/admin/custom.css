@@ -1,0 +1,32 @@
+.table-cell-min-width-90 {
+    min-width: 90px;
+}
+
+.table-cell-min-width-55 {
+    min-width: 55px;
+}
+
+.table-cell-max-width-200 {
+    max-width: 200px;
+}
+
+table.table thead tr th,
+table.table tbody tr td {
+    padding: 5px;
+    vertical-align: middle;
+}
+
+table.table thead tr th:first-child,
+table.table tbody tr td:first-child {
+    padding-left: 15px;
+}
+
+table.table thead tr th {
+    background-color: #2a3eab;
+}
+
+/*Con esta regla alineamos las dos últimas celdas de la fila de la tabla*/
+table.table thead tr th:nth-last-child(-n+2) {
+    text-align: center;
+}
+

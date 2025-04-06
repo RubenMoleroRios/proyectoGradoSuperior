@@ -22,6 +22,11 @@
             return $connection::getArticlesByType(idType: (int)$_GET["id"]);
         }
 
+        public function getTypes(): array {
+            $connection = new DB();
+            return $connection::getTypeArticles();
+        }
+
 
     }
 

@@ -1,11 +1,13 @@
 <?php
+include_once "../../../src/config/parameters.php";    
 if (!isset($_SESSION)) {
   session_start();
 }
+if(isset($_SESSION["auth_shop"])) {
+  header(header:"Location: ".url_base_shop);
+}
 $_SESSION["app"] = "shop";
-include_once "../../../src/config/parameters.php";    
 ?>
-
 <html 
   lang="es" data-bs-theme="dark">
 
@@ -15,7 +17,7 @@ include_once "../../../src/config/parameters.php";
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>All blue</title>
+    <title>Login shop</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -105,7 +107,8 @@ include_once "../../../src/config/parameters.php";
     <link href="../../../public/style/sign-in.css" rel="stylesheet"></head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary" id="login">      
     <main class="form-signin w-100 m-auto">
-      <form method="POST" action="<?=base_url?>User/loginClient">
+      
+      <form method="POST" action="<?=url_base?>User/loginShop">
         <img class="mb-4" src="../../../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -118,8 +121,8 @@ include_once "../../../src/config/parameters.php";
           <label for="floatingPassword">Contraseña</label>
         </div>        
         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>        
-        <a href="<?=base_url_shop?>view/user/register-view.php" class="btn btn-primary w-100 py-2 mt-2">Registrarse</a>
-        <a href="<?=base_url?>" class="btn btn-primary w-100 py-2 mt-2" type="submit">Ir a la tienda</a>
+        <a href="<?=url_register_shop?>" class="btn btn-primary w-100 py-2 mt-2">Registrarse</a>
+        <a href="<?=url_base?>" class="btn btn-primary w-100 py-2 mt-2" type="submit">Ir a la tienda</a>
         <div class="invalid-feedback d-block">
             <?php
               if (isset($_SESSION['errorLogin'])){                    

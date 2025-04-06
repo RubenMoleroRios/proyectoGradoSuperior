@@ -3,7 +3,7 @@
         session_start();
     }
     include_once "include.php";
-
+    include_once "./shop/view/include/header.php";
     $typeController = new TypeController();
     $type = $typeController->showType();
 ?>
@@ -16,7 +16,7 @@
         foreach ($products as $product) {
     ?>
             <div class="col-4 col-sm-12 col-md-4 mb-3">
-                <a href="<?=base_url?>Article/article&id=<?=$product->getId();?>">
+                <a href="<?=controller_action_article_list_shop?>&id=<?=$product->getId();?>">
                     <div><?=$product->getName()?></div>
                     <div><?=$product->getFormatPrice()?></div>
                 </a>
@@ -26,3 +26,6 @@
     ?>
     </div>                               
 </div>
+<?php
+include_once "./shop/view/include/footer.php";
+?>

@@ -13,26 +13,25 @@
                 $connection = new DB();
                 $login = $connection::loginAdmin(email: $_POST['email'],password: $_POST['password']);
                 if($login) {        
-                    $_SESSION['loginAdmin'] = serialize(value: $login);    
-                    
-                    header(header: "Location: ".base_url_admin);
+                    $_SESSION['auth_admin'] = serialize(value: $login);
+                    header(header: "Location: ".controller_action_index_admin);
                 }
             }else{
                 $_SESSION['error_login'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';                
-                header(header: "Location: ".base_url_admin."loginAdmin.php");
+                header(header: "Location: ".url_login_admin);
             }            
         }
 
-        public function loginClient(): void{
+        public function loginShop(): void{
             if(isset($_POST)){
                 $connection = new DB();
                 $login = $connection::loginUser(email: $_POST['email'],password: $_POST['password']);                        
                 if($login) {      
-                    $_SESSION['loginClient'] =  serialize(value: $login);                                                                           
-                    header(header: "Location: ".indexUrl);
+                    $_SESSION['auth_shop'] =  serialize(value: $login);                        
+                    header(header: "Location: ".controller_action_index_shop);
                 }else{
                     $_SESSION['errorLogin'] = 'Identificación errónea, porfavor compruebe usuario y/o contraseña';
-                    header(header: "Location: ".base_url_shop."view/Users/loginView.php");
+                    header(header: "Location: ".url_login_shop);
                 }   
             }         
             
@@ -48,10 +47,10 @@
                 );
                 try{
                     $addUser::insertUser(user: $client);                    
-                    header(header: "Location: ".base_url);                
+                    header(header: "Location: ".url_base);                
                 }catch(Exception $e){
                     $_SESSION["errorRegister"] = "Email repetido, pruebe otro porfavor.";
-                    header(header:"Location: ".base_url_shop."view/usuario/registro.php");                    
+                    header(header:"Location: ".url_base_shop."view/usuario/registro.php");                    
                 }
             }
         }

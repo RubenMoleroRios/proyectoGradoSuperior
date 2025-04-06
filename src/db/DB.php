@@ -379,7 +379,7 @@ class DB {
 
     public static function deleteArticle(Article $article): void{
         $connection = DB::getConection();
-        $sql = "DELETE FROM article where ".Article::$ID." = ".$article->getId();
+        $sql = "DELETE FROM article where ".Article::$ID." = ".$article->getId();        
         mysqli_query(mysql: $connection,query: $sql);
     }
 
