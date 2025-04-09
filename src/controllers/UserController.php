@@ -57,6 +57,11 @@
             return $connection::getUsers();
         }
 
+        public function getUserById(int $user): user{
+            $connection = new DB();
+            return $connection::getUserById(idUser: $user);
+        }
+
         public function loginAdmin(): void {       
             if(isset($_POST)){
                 $connection = new DB();
