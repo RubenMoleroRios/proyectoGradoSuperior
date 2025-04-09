@@ -22,10 +22,10 @@ include_once "./include.php";
     <link href="../public/style/admin/dashboard.css" rel="stylesheet">
     <link href="../public/style/admin/custom.css" rel="stylesheet">
     <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+
     <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
     <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+    <link href="../public/style/sign-in.css" rel="stylesheet"></head>
     <meta name="theme-color" content="#712cf9">
     <style>
       .bd-placeholder-img {
@@ -256,46 +256,31 @@ include_once "./include.php";
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_article_add_admin?>">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_article_view_add_admin?>">
                 <svg class="bi" aria-hidden="true"><use xlink:href="#puzzle"></use></svg>
                 Añadir artículo
-              </a>
-            </li>            
+              </a>              
           </ul>
 
           <hr class="my-3">
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-            <span>Pedidos</span>        
+            <span>Pedidos</span>            
           </h6>
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#cart"></use></svg>
-                Current month
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_order_list_admin?>">
+                <svg class="bi" aria-hidden="true"><use xlink:href="#puzzle"></use></svg>
+                Listar pedidos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#cart"></use></svg>
-                Last quarter
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#cart"></use></svg>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#cart"></use></svg>
-                Year-end sale
-              </a>
-            </li>
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_order_view_add_admin?>">
+                <svg class="bi" aria-hidden="true"><use xlink:href="#puzzle"></use></svg>
+                Añadir pedidos
+              </a>              
           </ul>
-
-          
+        
           <hr class="my-3">
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
@@ -303,29 +288,17 @@ include_once "./include.php";
           </h6>
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_type_list_admin?>">
                 <svg class="bi" aria-hidden="true"><use xlink:href="#file-earmark-text"></use></svg>
-                Current month
+                Listar tipos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_type_view_add_admin?>">
                 <svg class="bi" aria-hidden="true"><use xlink:href="#file-earmark-text"></use></svg>
-                Last quarter
+                Añadir tipos
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#file-earmark-text"></use></svg>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#file-earmark-text"></use></svg>
-                Year-end sale
-              </a>
-            </li>
+            </li>            
           </ul>
 
           <hr class="my-3">
@@ -335,30 +308,18 @@ include_once "./include.php";
           </h6>
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_user_list_admin?>">
                 <svg class="bi" aria-hidden="true"><use xlink:href="#people"></use></svg>
-                Current month
+                Listar Usuarios
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="<?=controller_action_user_view_add_admin?>">
                 <svg class="bi" aria-hidden="true"><use xlink:href="#people"></use></svg>
-                Last quarter
+                Añadir Usuarios
               </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#people"></use></svg>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <svg class="bi" aria-hidden="true"><use xlink:href="#people"></use></svg>
-                Year-end sale
-              </a>
-            </li>
-          </ul>
+            </li>           
+          </ul>          
 
           <hr class="my-3">
 

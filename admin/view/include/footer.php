@@ -12,6 +12,16 @@
         
         <script type="text/javascript">
             var urlDeleteArticle = "<?=controller_action_article_delete_admin?>";
+            var urlUpdateArticle = "<?=controller_action_article_view_update_admin?>";
+
+            var urlDeleteOrder = "<?=controller_action_order_delete_admin?>";
+            var urlUpdateOrder = "<?=controller_action_order_view_update_admin?>";
+
+            var urlDeleteType = "<?=controller_action_type_delete_admin?>";
+            var urlUpdateType = "<?=controller_action_type_view_update_admin?>";
+
+            var urlDeleteUser = "<?=controller_action_user_delete_admin?>";
+            var urlUpdateUser = "<?=controller_action_user_view_update_admin?>";
             <?php
             /*
                 Aquí indicamos que si hay una sesión llamada msg, primero que espere a cargar la página completamente

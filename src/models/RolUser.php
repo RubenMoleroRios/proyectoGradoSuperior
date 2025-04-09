@@ -15,11 +15,11 @@
             $this->name = $name;
         }
 
-        public function getId(){
+        public function getId(): mixed{
             return $this->idRolUser;
         }        
 
-        public function getName() {
+        public function getName(): mixed {
             return $this->name;
         }
 

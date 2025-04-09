@@ -24,19 +24,19 @@
             $this->star = $star;
         }
 
-        public function getIdReview() {
+        public function getIdReview(): mixed {
             return $this->idReview;
         }
 
-        public function getOpinion() {
+        public function getOpinion(): mixed {
             return $this->opinion;
         }
 
-        public function getIdArticle() {
+        public function getIdArticle(): mixed {
             return $this->idArticle;
         }
 
-        public function getStar() {
+        public function getStar(): mixed {
             return $this->star;
         }
 

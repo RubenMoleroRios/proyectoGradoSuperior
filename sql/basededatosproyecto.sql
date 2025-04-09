@@ -31,6 +31,9 @@ insert into `type` value (1, "Peces");
 insert into `type` value (2, "Plantas");
 insert into `type` value (3, "Accesorios");
 
+insert into `order` value(null, 1,"mi calle",25);
+insert into `order` value(null, 1,"mi calle del usuario 3",2225);
+
 /*insert into article(id_type,name,ph,gh,description,temp,longevity,planted_in,stock,price) value (1, "Guppy", 5.5, 15, "El guppy es un pez ovovivíparo de agua dulce procedente 
 de Sudamérica que habita en zonas de corriente baja de ríos, lagos y charcas",28,"3 años", null, 30, 2.5);*/
 insert into `article` () value (1, 1, "Guppy", 5.5, 15, "El guppy es un pez ovovivíparo de agua dulce procedente 

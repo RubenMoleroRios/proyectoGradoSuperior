@@ -102,7 +102,7 @@ if (!isset($_SESSION)) {
     <link href="../../../public/style/sign-in.css" rel="stylesheet"></head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary" id="registro">          
     <main class="form-signin w-100 m-auto">
-      <form method="POST" action="<?=url_register_shop?>" class="was-validated">
+      <form method="POST" action="<?=controller_action_user_register?>" class="was-validated">
         <img class="mb-4" src="../../../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Registro:</h1>
 

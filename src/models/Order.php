@@ -24,19 +24,19 @@
             $this->totalOrderPrice = $totalOrderPrice;
         }
 
-        public function getIdOrder() {
+        public function getIdOrder(): mixed {
             return $this->idOrder;
         }
 
-        public function getIdUser() {
+        public function getIdUser(): mixed {
             return $this->idUser;
         }
 
-        public function getAddress() {
+        public function getAddress(): mixed {
             return $this->address;
         }
 
-        public function getTotalOrderPrice() {
+        public function getTotalOrderPrice(): mixed {
             return $this->totalOrderPrice;
         }
 

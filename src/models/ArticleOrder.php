@@ -28,23 +28,23 @@
             $this->totalArticlePrice = $totalArticlePrice;
         }
 
-        public function getIdArticleOrder() {
+        public function getIdArticleOrder(): mixed {
             return $this->idArticleOrder;
         }
 
-        public function getIdArticle() {
+        public function getIdArticle(): mixed {
             return $this->idArticle;
         }
 
-        public function getIdOrder() {
+        public function getIdOrder(): mixed {
             return $this->idOrder;
         }
 
-        public function getQuantity() {
+        public function getQuantity(): mixed {
             return $this->quantity;
         }
 
-        public function getTotalArticlePrice() {
+        public function getTotalArticlePrice(): mixed {
             return $this->totalArticlePrice;
         }
 

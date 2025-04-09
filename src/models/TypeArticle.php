@@ -21,11 +21,11 @@
             $this->nameType = $nameType;
         }
 
-        public function getIdType() {
+        public function getIdType(): mixed {
             return $this->idType;
         }
 
-        public function getNameType() {
+        public function getNameType(): mixed {
             return $this->nameType;
         }
 

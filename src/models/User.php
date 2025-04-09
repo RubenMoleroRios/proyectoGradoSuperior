@@ -28,23 +28,23 @@
             $this->idRolUser = $idRolUser;
         }
 
-        public function getIdUser() {
+        public function getIdUser(): mixed {
             return $this->idUser;
         }
 
-        public function getEmail() {
+        public function getEmail(): mixed {
             return $this->email;
         }
 
-        public function getUserName() {
+        public function getUserName(): mixed {
             return $this->userName;
         }
 
-        public function getPassword() {
+        public function getPassword(): mixed {
             return $this->password;
         }
 
-        public function getIdRolUser() {
+        public function getIdRolUser(): mixed {
             return $this->idRolUser;
         }
 

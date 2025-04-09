@@ -123,16 +123,18 @@ class DB {
 
     public static function getOrders(): array{
         $connection = DB::getConection();
-        $sql = "SELECT * FROM order";
+        $sql = "SELECT * FROM `order`";
+        //  echo $sql;
+        //  die();
         $result = mysqli_query(mysql: $connection, query: $sql);
         $orders = [];
-        if (mysqli_num_rows(result: $result)>0){
+        if (mysqli_num_rows(result: $result) > 0){
             foreach ($result as $order) {
                 $orders[] = new Order(
-                    idOrder: $order[Order::$idOrder],
-                    idUser: $order[Order::$idUser],
-                    address: $order[Order::$address],
-                    totalOrderPrice: $order[Order::$totalOrderPrice]
+                    idOrder: $order[Order::$ID_ORDER],
+                    idUser: $order[Order::$ID_USER],
+                    address: $order[Order::$ADDRESS],
+                    totalOrderPrice: $order[Order::$TOTAL_ORDER_PRICE]
                 );
             }
         }
@@ -141,7 +143,7 @@ class DB {
 
     public static function getOrderById(int $idOrder): Order {
         $connection = DB::getConection();
-        $sql = "SELECT * FROM order where ".Order::$ID_ORDER." = ".$idOrder;
+        $sql = "SELECT * FROM `order` where ".Order::$ID_ORDER." = ".$idOrder;
         $result = mysqli_query(mysql: $connection,query: $sql);
         $order = mysqli_fetch_assoc(result: $result);
         $orderObtained = null;
@@ -150,7 +152,7 @@ class DB {
                 idOrder: $order[Order::$ID_ORDER],
                 idUser: $order[Order::$ID_USER],
                 address: $order[Order::$ADDRESS],
-                totalOrderPrice: $order[Order::$totalOrderPrice]
+                totalOrderPrice: $order[Order::$TOTAL_ORDER_PRICE]
             );
         }
         return $orderObtained;
@@ -320,23 +322,23 @@ class DB {
             $articleOrder->getIdArticle().",". 
             $articleOrder->getIdOrder().",". 
             $articleOrder->getQuantity().",". 
-            $articleOrder->getTotalArticlePrice().",         
+            $articleOrder->getTotalArticlePrice()."         
             )";
         mysqli_query(mysql: $connection, query: $sql);
     }
 
     public static function insertOrder(Order $order): void{
         $connection = DB::getConection();
-        $sql = "INSERT into order values(
+        $sql = "INSERT into `order` values(
             null,".
             $order->getIdUser().",'".
             $order->getAddress()."',".
-            $order->getTotalOrderPrice().",
+            $order->getTotalOrderPrice()."
             )";
         mysqli_query(mysql: $connection, query: $sql);
     }
 
-    public static function inserReview(Review $review): void{
+    public static function insertReview(Review $review): void{
         $connection = DB::getConection();
         $sql = "INSERT into review values(
             null,'".
@@ -349,7 +351,7 @@ class DB {
 
     public static function insertTypeArticle(TypeArticle $typeArticle): void{
         $connection = DB::getConection();
-        $sql = "INSERT into 'type' values(
+        $sql = "INSERT into `type` values(
             null,'".
             $typeArticle->getNameType().
             "')";
@@ -365,7 +367,7 @@ class DB {
         mysqli_query(mysql: $connection, query: $sql);
     }
 
-    public static function insertUser(User $user): void{
+    public static function insertClient(User $user): void{
         $connection = DB::getConection();        
             $sql = "INSERT into user values (
                 null,'".
@@ -376,6 +378,20 @@ class DB {
                 ")";
             mysqli_query(mysql: $connection, query: $sql);
     } 
+
+    public static function insertUser(User $user): void{
+        $connection = DB::getConection();        
+            $sql = "INSERT into user values (
+                null,'".
+                $user->getEmail()."','".
+                $user->getUserName()."','".            
+                $user->getPassword()."',".
+                $user->getIdRolUser().
+                ")";
+            mysqli_query(mysql: $connection, query: $sql);
+    } 
+
+    
 
     public static function deleteArticle(Article $article): void{
         $connection = DB::getConection();
@@ -391,20 +407,27 @@ class DB {
 
     public static function deleteOrder(Order $order): void{
         $connection = DB::getConection();
-        $sql = "DELETE FROM order where ". Order::$ID_ORDER." = ".$order->getIdOrder();
+        $sql = "DELETE FROM `order` where ". Order::$ID_ORDER." = ".$order->getIdOrder();
         mysqli_query(mysql: $connection,query: $sql);
     }
 
     public static function deleteReview(Review $review): void{
         $connection = DB::getConection();
-        $sql = "DELETE FROM order where ". Review::$ID_REVIEW." = ".$review->getIdReview();
+        $sql = "DELETE FROM `order` where ". Review::$ID_REVIEW." = ".$review->getIdReview();
         mysqli_query(mysql: $connection,query: $sql);
     }
 
     public static function deleteTypeArticle(TypeArticle $typeArticle): void{
-        $connection = DB::getConection();
-        $sql = "DELETE FROM 'type' where ". TypeArticle::$ID_TYPE." = ".$typeArticle->getIdType();
-        mysqli_query(mysql: $connection,query: $sql);
+        $connection = DB::getConection();           
+        $sql = "DELETE FROM `type` where ". TypeArticle::$ID_TYPE." = ".$typeArticle->getIdType();    
+        try{
+            $_SESSION['msg'] = "Tipo borrado correctamente";
+            mysqli_query(mysql: $connection,query: $sql);            
+            header(header: "Location: ".controller_action_type_list_admin);                        
+        }catch(mysqli_sql_exception $e){
+            $_SESSION['msg'] = "Tipo actualmente usado por un artículo, porfavor, compruebe los artículos y quítele/modifiquele el tipo antes de borrar.";
+            header(header: "Location: ".controller_action_type_update_admin);                           
+        }
     }
 
     public static function deleteRolUser(RolUser $rolUser): void{
@@ -485,7 +508,7 @@ class DB {
 
     public static function updateOrder(Order $order): void{ 
         $connection = DB::getConection();
-        $sql = "UPDATE order set ".
+        $sql = "UPDATE `order` set ".
             ($order->getIdUser()!="" ? "".Order::$ID_USER."='".$order->getIdUser() ."'," : "").
             ($order->getAddress()!="" ? "".Order::$ADDRESS."='".$order->getAddress() ."'," : "").
             ($order->getTotalOrderPrice()!="" ? "".Order::$TOTAL_ORDER_PRICE."='".$order->getTotalOrderPrice() ."'," : "").
@@ -495,7 +518,7 @@ class DB {
 
     public static function updateReview(Review $review): void{ 
         $connection = DB::getConection();
-        $sql = "UPDATE order set ".
+        $sql = "UPDATE `order` set ".
             ($review->getOpinion()!="" ? "".Review::$OPINION."='".$review->getOpinion() ."'," : "").
             ($review->getIdArticle()!="" ? "".Article::$ID."='".$review->getIdArticle() ."'," : "").
             ($review->getStar()!="" ? "".Review::$STAR."='".$review->getStar() ."'," : "").
@@ -505,7 +528,7 @@ class DB {
 
     public static function updateTypeArticle(TypeArticle $typeArticle): void{ 
         $connection = DB::getConection();
-        $sql = "UPDATE 'type' set ".
+        $sql = "UPDATE `type` set ".
             ($typeArticle->getNameType()!="" ? "".TypeArticle::$NAME_TYPE."='".$typeArticle->getNameType() ."'," : "").
             TypeArticle::$ID_TYPE."=".$typeArticle->getIdType()." WHERE ". TypeArticle::$ID_TYPE ."=".$typeArticle->getIdType();
         mysqli_query(mysql: $connection,query: $sql);
@@ -522,9 +545,11 @@ class DB {
     public static function updateUser(User $user): void{ 
         $connection = DB::getConection();
         $sql = "UPDATE user set ".    
+            ($user->getEmail()!="" ? "".User::$EMAIL."='".$user->getEmail() ."'," : "").  
             // si getUserName si no está vacio que actualice el campo, si no, que no haga nada
             ($user->getUserName()!="" ? "".User::$USER_NAME."='".$user->getUserName() ."'," : "").
             ($user->getPassword()!="" ? "".User::$PASSWORD."='".$user->getPassword() ."'," : "").
+            ($user->getIdRolUser()!="" ? "".User::$ID_ROL_USER."='".$user->getIdRolUser() ."'," : "").
             User::$ID_USER."=".$user->getIdUser()." WHERE ". User::$ID_USER ."=".$user->getIdUser();
         mysqli_query(mysql: $connection,query: $sql);
     }

@@ -39,7 +39,7 @@ $userAdd = new User(
     userName:"ruben23",
     password:"9nmjmdeer"
 );         
-$conexion::insertUser($userAdd);
+$conexion::insertClient($userAdd);
 */
 //$users = $conexion->getUsers();
 //echo '<pre>'.var_export($userAdd,true).'</pre>';
@@ -111,7 +111,7 @@ echo '<pre>'.var_export($updateArticle,true).'</pre>';
 echo "<h3>Aqu listamos un articulo </h3>";
 $articuloListado = $conexion::getArticleById(22);
 echo '<pre>'.var_export($articuloListado,true).'</pre>';
-
+$prueba = $articuloListado->getName();
 
 
 echo "<h1>Prueba de login</h1>";
