@@ -4,6 +4,11 @@ if (!isset($_SESSION)) {
 }
 include_once "./admin/view/include/header.php";
 $users = (new UserController())->getUsers();
+$roles = (new RolUserController())->getRoles();
+$rolesArray = [];
+foreach ($roles as $rol) {
+    $rolesArray[$rol->getId()] = $rol->getName();
+}
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -36,7 +41,7 @@ $users = (new UserController())->getUsers();
                         <td><?=$user->getEmail()?></td>
                         <td><?=$user->getUserName()?></td>                             
                         <td><?=$user->getPassword()?></td>
-                        <td><?=$user->getIdRolUser()?></td>
+                        <td><?=$rolesArray[$user->getIdRolUser()]?></td>
 
                         <td class="text-center">
                             <a href="#" class="update-user" data-id="<?=$user->getIdUser()?>">

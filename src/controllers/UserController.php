@@ -32,7 +32,7 @@
                     $DB::insertClient(user: $user);                    
                     header(header: "Location: ".controller_action_user_list_admin);                
                 }catch(mysqli_sql_exception $e){
-                    $_SESSION["msg"] = "Email repetido, pruebe otro porfavor.";
+                    $_SESSION["msg"] = "Email repetido, pruebe otro por favor.";
                     header(header:"Location: ".controller_action_user_view_add_admin);                    
                 }
             }
@@ -44,8 +44,7 @@
                 $user = new User(
                   idUser: $_GET['id']
                 );
-                $connection->deleteUser( user: $user);    
-                $_SESSION['msg']="Usuario borrado correctamente.";            
+                $connection->deleteUser( user: $user);        
             }else{                
                 $_SESSION['msg']="Identificador del usuario no encontrado.";
             }  
@@ -126,10 +125,10 @@
                 );
                 try{
                     $addUser::insertClient(user: $client);                    
-                    header(header: "Location: ".url_base);                
+                    header(header: "Location: ".url_base_shop);                
                 }catch(mysqli_sql_exception $e){
                     $_SESSION["errorRegister"] = "Email repetido, pruebe otro porfavor.";
-                    header(header:"Location: ".url_base_shop."view/usuario/registro.php");                    
+                    header(header:"Location: ".url_register_shop);                    
                 }
             }
         }

@@ -10,7 +10,8 @@ include_once "./include.php";
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./public/style/style.css" media="screen">
+        <link rel="stylesheet" href="../public/style/style.css" media="screen" type="text/css">
+        <link rel="stylesheet" href="../public/style/custom.css" media="screen" type="text/css">
         <title>All blue</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -21,7 +22,7 @@ include_once "./include.php";
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-                    <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                    <img src="../public/image/ilerna.png" width="72" height="57">
                     </a>
                 </div>
 
@@ -49,9 +50,12 @@ include_once "./include.php";
                     ?>  
                         <div class="btn btn-outline-primary me-2"><?=unserialize(data: $_SESSION["auth_shop"])->getUserName()?></div>
                         <a href="<?=url_base_shop?>view/auth/logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                        <a href="<?=controller_action_list_carrito_shop?>" class="btn btn-outline-primary me-2">Ver carrito</a>
                     <?php
-                        }
-                    ?>               
+                        }                        
+                    ?>                       
                 </div>
             </header>
         </div>
+
+        

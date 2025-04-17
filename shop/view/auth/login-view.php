@@ -130,8 +130,21 @@ $_SESSION["app"] = "shop";
                 unset($_SESSION['errorLogin']);
               }
             ?>
-          </div>
+          </div>          
       </form>
+      <script type="text/javascript">         
+            <?php
+            
+                if (isset($_SESSION['msg'])){                    
+                    ?>
+                    window.onload = (event) => {
+                        alert("<?=$_SESSION['msg']?>");
+                    };                    
+                    <?php
+                    unset($_SESSION['msg']);
+                }
+            ?>
+        </script>
     </main>
   </body>
 </html>

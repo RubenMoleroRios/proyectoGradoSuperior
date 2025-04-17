@@ -46,7 +46,7 @@ foreach ($types as $type) {
                         <?php foreach ($articles as $article) {?>
                     <tr>
                         <td><a href="#" class="update-article" data-id="<?=$article->getId()?>"><?=$article->getId()?></a></td>
-                        <td><a href="<?=controller_action_type_update_admin?>&id=<?=$article->getIdType()?>"><?=$typesArray[$article->getIdType()]?></a></td>
+                        <td><a href="#" class="update-type" data-id="<?=$article->getIdType()?>"><?=$typesArray[$article->getIdType()]?></a></td>
                         <td><?=$article->getName()?></td>
                         <td><?=$article->getPh()?></td>
                         <td><?=$article->getGh()?></td>

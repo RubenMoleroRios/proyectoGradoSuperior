@@ -30,3 +30,15 @@ table.table thead tr th:nth-last-child(-n+2) {
     text-align: center;
 }
 
+.form-floating textarea{
+    height: inherit !important;
+}
+
+.form-control {
+    margin-top: 5px;
+    margin-bottom: 5px;    
+}
+
+.btn {
+    margin-top: 5px;
+}

@@ -22,6 +22,9 @@
 
             var urlDeleteUser = "<?=controller_action_user_delete_admin?>";
             var urlUpdateUser = "<?=controller_action_user_view_update_admin?>";
+
+            var urlDeleteReview = "<?=controller_action_review_delete_admin?>";
+            var urlUpdateReview = "<?=controller_action_review_view_update_admin?>";
             <?php
             /*
                 Aquí indicamos que si hay una sesión llamada msg, primero que espere a cargar la página completamente
@@ -38,6 +41,5 @@
                 }
             ?>
         </script>
-
     </body>
 </html>

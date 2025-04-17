@@ -3,7 +3,7 @@ include_once "./admin/view/include/header.php";
 ?>
 
 <main class="form-signin w-100 m-auto">
-        <form method="POST" action="<?=controller_action_article_add_admin?>" class="was-validated">
+        <form method="POST" action="<?=controller_action_article_add_admin?>" class="was-validated" enctype="multipart/form-data">
         <img class="mb-4" src="../public/image/ilerna.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Añadir Artículo</h1>
 
@@ -29,8 +29,7 @@ include_once "./admin/view/include/header.php";
         
         <div class="form-floating">
             <label for="floatingInput">Descripción:</label>
-            <textarea id="story" name="description" rows="6" cols="38" class="form-control"> 
-            </textarea>
+            <textarea name="description" rows="6" cols="38" class="form-control"></textarea>
         </div>
 
         <div class="form-floating">
@@ -57,6 +56,11 @@ include_once "./admin/view/include/header.php";
             <input type="number" name="price" min="0" step="any" class="form-control">
             <label for="floatingInput">Precio:</label>
         </div>
+
+        <div class="form-floating">            
+            <input name="imageArticle" type="file"/>
+        </div>
+
         <button class="btn btn-primary w-100 py-2" type="submit">Añadir</button>        
       </form>
     </main>

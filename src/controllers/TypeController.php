@@ -89,8 +89,7 @@
                     header(header:"Location: ".controller_action_type_list_admin);                    
                 }
             }
-        }
-
+        }    
     }
 
 ?>

@@ -89,3 +89,21 @@ updateUsers.forEach(function(updateUser) {
   });
 });
 
+const deleteReviewButtons = document.querySelectorAll(".delete-review");
+
+deleteReviewButtons.forEach(function(deleteReview) {
+  deleteReview.addEventListener("click", () => {
+    if (window.confirm("¿Estás seguro de borrar?")) {
+      window.location.href = urlDeleteReview+"&id="+deleteReview.getAttribute('data-id');
+    } 
+  });
+});
+
+const updateReview = document.querySelectorAll(".update-review");
+
+updateReview.forEach(function(updateReview) {
+  updateReview.addEventListener("click", () => {
+      window.location.href = urlUpdateReview+"&id="+updateReview.getAttribute('data-id');
+  });
+});
+

@@ -5,23 +5,28 @@
         static $ID_REVIEW = 'id_review';
         static $OPINION = 'opinion';
         static $ID_ARTICLE = 'id_article';
-        static $STAR = 'star';
+        static $ID_USER = 'id_user';
+        static $NAME = 'name';
 
         public $idReview;
         public $opinion;
         public $idArticle;
-        public $star;
+        public $idUser;
+        public $name;
 
         public function __construct(
             $idReview = NULL,
             $opinion = NULL,
             $idArticle = NULL,
-            $star = NULL
+            $idUser = NULL,
+            $name = NULL
+
             ) {
             $this->idReview = $idReview;
             $this->opinion = $opinion;
             $this->idArticle = $idArticle;
-            $this->star = $star;
+            $this->idUser = $idUser;
+            $this->name = $name;
         }
 
         public function getIdReview(): mixed {
@@ -36,8 +41,11 @@
             return $this->idArticle;
         }
 
-        public function getStar(): mixed {
-            return $this->star;
+        public function getIdUser(): mixed {
+            return $this->idUser;
+        }
+        public function getName(): mixed {
+            return $this->name;
         }
 
         public function setIdReview($idReview): void {
@@ -52,8 +60,12 @@
             $this->idArticle = $idArticle;
         }
 
-        public function setStar($star): void {
-            $this->star = $star;
+        public function setIdUser($idUser): void {
+            $this->idUser = $idUser;
+        }
+
+        public function setName($name): void {
+            $this->name = $name;
         }
 
 

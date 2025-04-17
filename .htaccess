@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 
     RewriteEngine on
-    ErrorDocument 404 http://localhost/proyectoGradoSuperior/error/
+    ErrorDocument 404 http://localhost/allBlue/error/
 
     RewriteCond %{SCRIPT_FILENAME} !-d
     RewriteCond %{SCRIPT_FILENAME} !-f
@@ -12,6 +12,6 @@
     #RewriteRule ^admin/$ /indexAdmin.php?controller=$1&action=$2
     #RewriteRule ^/$ /index.php?controller=$1&action=$2
 
-    #RewriteRule ^(.*)/proyectoGradoSuperior/(.*) /index.php?controller=$1&action=$2
+    #RewriteRule ^(.*)/allBlue/(.*) /index.php?controller=$1&action=$2
     #RewriteRule ^/$ /index.php?controller=$1&action=$2
 </IfModule>

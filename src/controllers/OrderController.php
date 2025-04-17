@@ -39,6 +39,8 @@
             }
         }
 
+        
+
         public function deleteOrder(): void {            
             if(isset($_GET['id'])){                
                 $connection = new DB();

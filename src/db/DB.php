@@ -96,6 +96,20 @@ class DB {
         return $articles;
     }
 
+    public static function getArticleRandom(): Article{
+        $connection = DB::getConection();
+        $sql = "SELECT id_article FROM article where id_article =". RAND(min: 1,max: 30);
+        $result = mysqli_query(mysql: $connection, query: $sql);        
+        $article = mysqli_fetch_assoc(result: $result);
+        $idArticleObtained = null;
+        if($article != NULL){
+            $idArticleObtained = new Article(
+                id: $article[Article::$ID],                           
+            );                                 
+        }
+        return $idArticleObtained;
+    }
+
     public static function getArticlesRandomByTypes(int $idType, int $limit): array{
         $connection = DB::getConection();
         $sql = "SELECT * FROM article where ".Article::$ID_TYPE." = ".$idType." ORDER BY RAND() LIMIT ".$limit;
@@ -124,8 +138,6 @@ class DB {
     public static function getOrders(): array{
         $connection = DB::getConection();
         $sql = "SELECT * FROM `order`";
-        //  echo $sql;
-        //  die();
         $result = mysqli_query(mysql: $connection, query: $sql);
         $orders = [];
         if (mysqli_num_rows(result: $result) > 0){
@@ -158,9 +170,17 @@ class DB {
         return $orderObtained;
     }
 
+    public static function getLastOrderIdByUserShop(): string{
+        $connection = DB::getConection();
+        $sql = "SELECT `id_order` FROM `order` where ".Order::$ID_USER."=".unserialize(data: $_SESSION['auth_shop'])->getIdUser()." ORDER BY `id_order` DESC LIMIT 1;";
+        $result = mysqli_query(mysql: $connection,query: $sql);
+        $order = mysqli_fetch_assoc(result: $result);
+        return (int)$order['id_order'];                        
+    }
+
     public static function getReviews(): array {
         $connection = DB::getConection();
-        $sql = "SELECT * FROM review,";
+        $sql = "SELECT * FROM review;";
         $result = mysqli_query(mysql: $connection,query: $sql);
         $reviews = [];
         if(mysqli_num_rows(result: $result) > 0){
@@ -169,7 +189,8 @@ class DB {
                     idReview: $review[Review::$ID_REVIEW],
                     opinion: $review[Review::$OPINION],
                     idArticle: $review[Review::$ID_ARTICLE],
-                    star: $review[Review::$STAR]
+                    idUser: $review[Review::$ID_USER],
+                    name: $review[Review::$NAME]
                 );
             }
         }
@@ -187,24 +208,23 @@ class DB {
                 idReview: $review[Review::$ID_REVIEW],
                 opinion: $review[Review::$OPINION],
                 idArticle: $review[Review::$ID_ARTICLE],
-                star: $review[Review::$STAR]
+                idUser: $review[Review::$ID_USER],
+                name: $review[Review::$NAME]
             );
         }
         return $reviewObtained;
     }
 
-    public static function getReviewsByStars(int $star): array {
+    public static function getReviewsByIdArticle(int $idArticle): array {
         $connection = DB::getConection();
-        $sql = "SELECT * FROM review where ".Review::$STAR." = ".$star;
+        $sql = "SELECT opinion, name FROM review where ".Review::$ID_ARTICLE." = ".$idArticle;
         $result = mysqli_query(mysql: $connection,query: $sql);
         $reviews = [];
-        if(mysqli_num_rows(result: $result) > 0){
-            foreach($result as $review){
+        if (mysqli_num_rows(result: $result) > 0) {            
+            foreach ($result as $review) {                
                 $reviews[] = new Review(
-                    idReview: $review[Review::$ID_REVIEW],
                     opinion: $review[Review::$OPINION],
-                    idArticle: $review[Review::$ID_ARTICLE],
-                    star: $review[Review::$STAR]
+                    name: $review[Review::$NAME],
                 );
             }
         }
@@ -296,7 +316,7 @@ class DB {
         return $userObtained;
     }
 
-    public static function insertArticle(Article $article): void{
+    public static function insertArticle(Article $article): int{
         $connection = DB::getConection();
         $sql = "INSERT into article values (
             null,".
@@ -313,6 +333,8 @@ class DB {
             $article->getPrice().            
             ")";            
         mysqli_query(mysql: $connection, query: $sql);
+        $id = mysqli_insert_id($connection);
+        return $id;
     }
 
     public static function insertArticleOrder(ArticleOrder $articleOrder): void{
@@ -327,7 +349,7 @@ class DB {
         mysqli_query(mysql: $connection, query: $sql);
     }
 
-    public static function insertOrder(Order $order): void{
+    public static function insertOrder(Order $order): int{
         $connection = DB::getConection();
         $sql = "INSERT into `order` values(
             null,".
@@ -336,6 +358,8 @@ class DB {
             $order->getTotalOrderPrice()."
             )";
         mysqli_query(mysql: $connection, query: $sql);
+        $id = mysqli_insert_id($connection);
+        return $id;
     }
 
     public static function insertReview(Review $review): void{
@@ -344,8 +368,12 @@ class DB {
             null,'".
             $review->getOpinion()."',".
             $review->getIdArticle().",".
-            $review->getStar()."
+            $review->getIdUser().",'".
+            $review->getName()."'
             )";
+
+            // echo $sql;
+            // die();
         mysqli_query(mysql: $connection, query: $sql);
     }
 
@@ -396,25 +424,41 @@ class DB {
     public static function deleteArticle(Article $article): void{
         $connection = DB::getConection();
         $sql = "DELETE FROM article where ".Article::$ID." = ".$article->getId();        
-        mysqli_query(mysql: $connection,query: $sql);
+        try{
+            $_SESSION['msg'] = "Artículo borrado correctamente";
+            mysqli_query(mysql: $connection,query: $sql);            
+            header(header: "Location: ".controller_action_article_list_admin);                        
+        }catch(mysqli_sql_exception $e){
+            $_SESSION['msg'] = "Artículo usado en un pedido, no se puede borrar.";
+            header(header: "Location: ".controller_action_article_update_admin);                           
+        }
     }
 
     public static function deleteArticleOrder(ArticleORder $articleOrder): void{
         $connection = DB::getConection();
         $sql = "DELETE FROM article_order where ". ArticleOrder::$ID_ARTICLE_ORDER." = ".$articleOrder->getIdArticleOrder();
         mysqli_query(mysql: $connection,query: $sql);
+        
     }
 
     public static function deleteOrder(Order $order): void{
         $connection = DB::getConection();
         $sql = "DELETE FROM `order` where ". Order::$ID_ORDER." = ".$order->getIdOrder();
-        mysqli_query(mysql: $connection,query: $sql);
+        mysqli_query(mysql: $connection,query: $sql);        
     }
 
     public static function deleteReview(Review $review): void{
         $connection = DB::getConection();
-        $sql = "DELETE FROM `order` where ". Review::$ID_REVIEW." = ".$review->getIdReview();
-        mysqli_query(mysql: $connection,query: $sql);
+        $sql = "DELETE FROM `review` where ". Review::$ID_REVIEW." = ".$review->getIdReview();
+        
+        try{
+            $_SESSION['msg'] = "Review borrada correctamente";
+            mysqli_query(mysql: $connection,query: $sql);         
+            header(header: "Location: ".controller_action_review_list_admin);                        
+        }catch(mysqli_sql_exception $e){
+            $_SESSION['msg'] = "Review actualmente usado por un artículo, porfavor, compruebe los artículos y quítele/modifiquele el tipo antes de borrar.";
+            header(header: "Location: ".controller_action_review_update_admin);                           
+        }
     }
 
     public static function deleteTypeArticle(TypeArticle $typeArticle): void{
@@ -439,7 +483,14 @@ class DB {
     public static function deleteUser(User $user): void{
         $connection = DB::getConection();
         $sql = "DELETE FROM user where ".User::$ID_USER."=".$user->getIdUser();
-        mysqli_query(mysql: $connection,query: $sql);
+        try{
+            $_SESSION['msg'] = "Usuario borrado correctamente";
+            mysqli_query(mysql: $connection,query: $sql);            
+            header(header: "Location: ".controller_action_user_list_admin);                        
+        }catch(mysqli_sql_exception $e){
+            $_SESSION['msg'] = "No se puede borrar el usuario porque tiene pedidos, por favor, bórrelos antes.";
+            header(header: "Location: ".controller_action_user_update_admin);                           
+        }
     }
 
     public static function loginUser($email, $password): false|User{
@@ -492,7 +543,7 @@ class DB {
             ($article->getStock()!="" ? "".Article::$STOCK."='".$article->getStock() ."'," : "").
             ($article->getPrice()!="" ? "".Article::$PRICE."='".$article->getPrice() ."'," : "").
             Article::$ID."=".$article->getId()." WHERE ". article::$ID."=".$article->getId();
-        mysqli_query(mysql: $connection,query: $sql);        
+        mysqli_query(mysql: $connection,query: $sql);          
     }
 
     public static function updateArticleOrder(ArticleOrder $articleOrder): void{ 
@@ -518,10 +569,11 @@ class DB {
 
     public static function updateReview(Review $review): void{ 
         $connection = DB::getConection();
-        $sql = "UPDATE `order` set ".
+        $sql = "UPDATE `review` set ".
             ($review->getOpinion()!="" ? "".Review::$OPINION."='".$review->getOpinion() ."'," : "").
-            ($review->getIdArticle()!="" ? "".Article::$ID."='".$review->getIdArticle() ."'," : "").
-            ($review->getStar()!="" ? "".Review::$STAR."='".$review->getStar() ."'," : "").
+            ($review->getIdArticle()!="" ? "".Review::$ID_ARTICLE."='".$review->getIdArticle() ."'," : "").
+            ($review->getIdUser()!="" ? "".Review::$ID_USER."='".$review->getIdUser() ."'," : "").
+            ($review->getName()!="" ? "".Review::$NAME."='".$review->getName() ."'," : "").
             Review::$ID_REVIEW."=".$review->getIdReview()." WHERE ". Review::$ID_REVIEW ."=".$review->getIdReview();
         mysqli_query(mysql: $connection,query: $sql);
     }

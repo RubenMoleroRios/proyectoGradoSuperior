@@ -7,6 +7,11 @@
         static $ID_ADMIN = 1;
         static $ID_NORMAL_USER = 2;
 
+        static $ROLES = [
+
+
+        ];
+
         public $idRolUser;
         public $name;
 
